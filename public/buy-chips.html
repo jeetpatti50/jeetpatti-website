@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Add Cash — JeetPatti</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#0a0006;min-height:100vh;
+  background-image:radial-gradient(ellipse 130% 60% at 50% -5%,rgba(160,10,30,.5),transparent 55%),linear-gradient(180deg,#0a0006,#160005);}
+.bar{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;
+  background:rgba(10,0,6,.97);border-bottom:1px solid rgba(240,192,64,.2);}
+.logo{font-family:'Cinzel',serif;font-size:19px;font-weight:900;color:#f0c040;text-decoration:none;letter-spacing:2px;}
+.logo b{color:#ffab91;}
+.back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;font-weight:700;}
+.wrap{max-width:480px;margin:0 auto;padding:24px 18px 60px;}
+
+.soon-badge{background:linear-gradient(135deg,rgba(240,192,64,.15),rgba(240,192,64,.05));
+  border:1px solid rgba(240,192,64,.4);border-radius:16px;padding:16px;text-align:center;margin-bottom:22px;}
+.soon-badge .t1{color:#f0c040;font-weight:900;font-size:15px;margin-bottom:4px;}
+.soon-badge .t2{color:rgba(255,255,255,.5);font-size:12px;line-height:1.6;}
+
+h2{color:#fff;font-size:16px;margin-bottom:14px;font-weight:800;}
+.rate{color:#f0c040;text-align:center;font-size:13px;font-weight:700;margin-bottom:18px;}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.pkg{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;
+  padding:16px;text-align:center;cursor:pointer;transition:all .15s;}
+.pkg:active,.pkg.on{border-color:#f0c040;background:rgba(240,192,64,.1);}
+.pkg .amt{color:#fff;font-size:18px;font-weight:900;}
+.pkg .chips{color:rgba(255,255,255,.4);font-size:11px;margin-top:4px;}
+
+.wa-box{background:linear-gradient(135deg,#0d3b1e,#0a2814);border:1px solid rgba(76,175,80,.4);
+  border-radius:18px;padding:20px;text-align:center;margin-top:8px;}
+.wa-icon{font-size:38px;margin-bottom:8px;}
+.wa-title{color:#fff;font-weight:900;font-size:15px;margin-bottom:6px;}
+.wa-sub{color:rgba(255,255,255,.55);font-size:12px;line-height:1.7;margin-bottom:16px;}
+.wa-btn{display:block;background:#25D366;color:#fff;text-decoration:none;font-weight:900;
+  font-size:14px;padding:13px;border-radius:26px;text-align:center;}
+.wa-btn:active{transform:scale(.98);}
+
+.steps{margin-top:24px;background:rgba(255,255,255,.03);border-radius:14px;padding:16px;}
+.steps .st-title{color:#f0c040;font-weight:800;font-size:13px;margin-bottom:10px;}
+.steps ol{margin-left:18px;color:rgba(255,255,255,.55);font-size:12px;line-height:2;}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="dashboard.html" class="back">← Back</a>
+  <a href="index.html" class="logo">♣ Jeet<b>Patti</b></a>
+  <div style="width:50px"></div>
+</div>
+
+<div class="wrap">
+  <div class="soon-badge">
+    <div class="t1">💳 Automatic Payment Coming Soon</div>
+    <div class="t2">For now, add cash directly through WhatsApp — it's fast and 100% manual, so your chips are added personally by our team.</div>
+  </div>
+
+  <h2>Choose a package</h2>
+  <div class="rate">1 Rupee = 1 Chip</div>
+
+  <div class="grid" id="pkgGrid">
+    <div class="pkg on" data-amt="1000"><div class="amt">₹1,000</div><div class="chips">1,000 chips</div></div>
+    <div class="pkg" data-amt="2000"><div class="amt">₹2,000</div><div class="chips">2,000 chips</div></div>
+    <div class="pkg" data-amt="5000"><div class="amt">₹5,000</div><div class="chips">5,000 chips</div></div>
+    <div class="pkg" data-amt="10000"><div class="amt">₹10,000</div><div class="chips">10,000 chips</div></div>
+  </div>
+
+  <div class="wa-box">
+    <div class="wa-icon">💬</div>
+    <div class="wa-title">Buy Chips on WhatsApp</div>
+    <div class="wa-sub">Tap below to message us your selected package.<br>We'll reply with our UPI ID / QR code — pay, send the screenshot, and your chips are added within minutes.</div>
+    <a href="#" class="wa-btn" id="waBtn">📲 Message on WhatsApp</a>
+  </div>
+
+  <div class="steps">
+    <div class="st-title">How it works</div>
+    <ol>
+      <li>Tap the WhatsApp button above</li>
+      <li>We'll send our UPI ID or QR code</li>
+      <li>Pay the amount via any UPI app</li>
+      <li>Send us the payment screenshot</li>
+      <li>Chips are added to your account instantly</li>
+    </ol>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+// PUT YOUR WHATSAPP NUMBER HERE — with country code, no
+// spaces, no +, no dashes. Example for India: 919876543210
+// ══════════════════════════════════════════════════════
+const WHATSAPP_NUMBER = "91XXXXXXXXXX"; // ← REPLACE THIS WITH YOUR REAL NUMBER
+const API_URL = "/api"; // change if your backend runs elsewhere
+
+const TK = localStorage.getItem('token');
+if(!TK) window.location.href = 'login.html';
+
+let selectedAmt = 1000;
+let userInfo = { name: 'Unknown', phone: 'Not available', id: 'Unknown' };
+
+// ══ Load the logged-in player's identity so the request can be verified ══
+async function loadUser(){
+  try{
+    const res = await fetch(`${API_URL}/auth/me`, { headers: { Authorization: TK } });
+    const data = await res.json();
+    userInfo.name = data.name || 'Unknown';
+    userInfo.phone = data.phone || 'Not available';
+    userInfo.id = data._id || data.id || 'Unknown';
+  }catch(e){}
+  updateWaLink();
+}
+loadUser();
+
+document.querySelectorAll('.pkg').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    document.querySelectorAll('.pkg').forEach(p=>p.classList.remove('on'));
+    el.classList.add('on');
+    selectedAmt = parseInt(el.dataset.amt);
+    updateWaLink();
+  });
+});
+
+function updateWaLink(){
+  const msg =
+`Hi! I want to buy chips on JeetPatti.
+
+Package: ₹${selectedAmt.toLocaleString()} (${selectedAmt.toLocaleString()} chips)
+
+── My Account ──
+Name: ${userInfo.name}
+Phone: ${userInfo.phone}
+User ID: ${userInfo.id}
+
+Please share the payment UPI ID / QR code.`;
+  const link = `https://wa.me/${7899735805}?text=${encodeURIComponent(msg)}`;
+  document.getElementById('waBtn').href = link;
+}
+updateWaLink();
+</script>
+</body>
+</html>

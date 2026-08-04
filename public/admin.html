@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel – JeetPatti</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .admin-page { padding: 32px 40px; max-width: 1200px; margin: 0 auto; }
+    .admin-tabs { display:flex; gap:4px; margin-bottom:28px; border-bottom:1px solid rgba(240,192,64,0.15); }
+    .tab-btn {
+      padding:10px 24px; background:transparent; border:none; color:var(--gray);
+      font-size:14px; cursor:pointer; border-bottom:2px solid transparent; transition:all 0.2s;
+      font-family:'Inter',sans-serif; font-weight:500;
+    }
+    .tab-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
+    .tab-panel { display:none; } .tab-panel.active { display:block; }
+    .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:28px; }
+    .action-btns-cell { display:flex; gap:6px; }
+    @media(max-width:900px){ .stats-row{grid-template-columns:1fr 1fr;} .admin-page{padding:20px;} }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="index.html" class="brand">♣ Jeet<span>Patti</span> <span style="font-size:12px;color:#e57373;margin-left:8px;">ADMIN</span></a>
+  <div></div>
+  <button class="btn btn-red btn-sm" onclick="adminLogout()">Logout</button>
+</nav>
+
+<div id="login-screen" style="min-height:90vh;display:flex;align-items:center;justify-content:center;padding:20px;">
+  <div style="max-width:380px;width:100%;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <h2 style="color:var(--gold);font-size:22px;">🔐 Admin Login</h2>
+      <p style="color:var(--gray);font-size:14px;">Enter admin password to continue</p>
+    </div>
+    <div class="card">
+      <div id="admin-login-alert"></div>
+      <div class="form-group">
+        <label>Admin Password</label>
+        <input type="password" id="admin-pass" placeholder="Enter password"/>
+      </div>
+      <button class="btn btn-gold btn-full" onclick="adminLogin()">Login to Admin Panel</button>
+    </div>
+  </div>
+</div>
+
+<div id="admin-content" style="display:none;">
+  <div class="admin-page">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+      <div>
+        <h1 style="font-size:22px;color:var(--gold);margin-bottom:4px;">Admin Dashboard</h1>
+        <p style="color:var(--gray);font-size:13px;">Manage all users, payments and withdrawals</p>
+      </div>
+      <button class="btn btn-green btn-sm" onclick="loadAdmin()">🔄 Refresh</button>
+    </div>
+
+    <div class="stats-row" id="admin-stats">
+      <div class="stat-card"><div class="stat-label">Total Users</div><div class="stat-value" id="st-users">-</div></div>
+      <div class="stat-card"><div class="stat-label">Today Revenue</div><div class="stat-value" id="st-revenue" style="color:var(--green-glow)">-</div></div>
+      <div class="stat-card"><div class="stat-label">Pending Withdrawals</div><div class="stat-value" id="st-pending" style="color:#ef9a9a">-</div></div>
+      <div class="stat-card"><div class="stat-label">Total Transactions</div><div class="stat-value" id="st-txns">-</div></div>
+    </div>
+
+    <div class="admin-tabs">
+      <button class="tab-btn active" onclick="switchTab('users')">👥 Users</button>
+      <button class="tab-btn" onclick="switchTab('withdrawals')">💰 Withdrawals</button>
+      <button class="tab-btn" onclick="switchTab('transactions')">📋 All Transactions</button>
+    </div>
+
+    <!-- Users Tab -->
+    <div class="tab-panel active" id="tab-users">
+      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+        <input type="text" id="search-user" placeholder="Search by name or email..." style="background:rgba(0,0,0,0.3);border:1px solid rgba(240,192,64,0.2);border-radius:var(--radius);padding:10px 14px;color:var(--white);font-family:Inter,sans-serif;font-size:14px;flex:1;min-width:200px;outline:none;" oninput="filterUsers(this.value)"/>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="data-table" id="users-table">
+          <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Chips</th><th>Joined</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="users-tbody"><tr><td colspan="8" style="text-align:center;padding:30px;"><div class="spinner"></div></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Withdrawals Tab -->
+    <div class="tab-panel" id="tab-withdrawals">
+      <div style="overflow-x:auto;">
+        <table class="data-table" id="withdraw-table">
+          <thead><tr><th>User</th><th>Chips</th><th>Amount</th><th>Bank Account</th><th>IFSC</th><th>Date</th><th>Action</th></tr></thead>
+          <tbody id="withdraw-tbody"><tr><td colspan="7" style="text-align:center;padding:30px;"><div class="spinner"></div></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Transactions Tab -->
+    <div class="tab-panel" id="tab-transactions">
+      <div style="overflow-x:auto;">
+        <table class="data-table">
+          <thead><tr><th>User</th><th>Type</th><th>Chips</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+          <tbody id="txn-tbody"><tr><td colspan="6" style="text-align:center;padding:30px;"><div class="spinner"></div></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+let adminPass = '';
+let allUsers = [];
+
+function showToast(msg) {
+  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+function adminLogin() {
+  const pass = document.getElementById('admin-pass').value;
+  if (!pass) return;
+  adminPass = pass;
+  loadAdmin();
+}
+
+function adminLogout() {
+  adminPass = '';
+  document.getElementById('admin-content').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('admin-pass').value = '';
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function filterUsers(val) {
+  const filtered = allUsers.filter(u => u.name.toLowerCase().includes(val.toLowerCase()) || u.email.toLowerCase().includes(val.toLowerCase()));
+  renderUsers(filtered);
+}
+
+function renderUsers(users) {
+  document.getElementById('users-tbody').innerHTML = users.map((u, i) => `
+    <tr>
+      <td style="color:var(--gray)">${i+1}</td>
+      <td style="font-weight:500">${u.name}</td>
+      <td style="color:var(--gray)">${u.email}</td>
+      <td style="color:var(--gray)">${u.phone}</td>
+      <td><span style="color:var(--gold);font-weight:600">${(u.chips||0).toLocaleString()}</span></td>
+      <td style="color:var(--gray);font-size:12px">${new Date(u.createdAt).toLocaleDateString('en-IN')}</td>
+      <td><span class="badge ${u.isBlocked ? 'badge-red' : 'badge-green'}">${u.isBlocked ? 'Blocked' : 'Active'}</span></td>
+      <td><div class="action-btns-cell">
+        <button class="btn btn-sm ${u.isBlocked ? 'btn-green' : 'btn-red'}" onclick="toggleBlock('${u._id}', ${u.isBlocked})">${u.isBlocked ? 'Unblock' : 'Block'}</button>
+      </div></td>
+    </tr>
+  `).join('') || '<tr><td colspan="8" style="text-align:center;color:var(--gray);padding:20px;">No users found</td></tr>';
+}
+
+async function loadAdmin() {
+  try {
+    const res = await fetch('/api/admin/dashboard', { headers: { 'Authorization': adminPass } });
+    if (res.status === 401) {
+      document.getElementById('admin-login-alert').innerHTML = '<div class="alert alert-error">Wrong password / गलत पासवर्ड</div>';
+      return;
+    }
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-content').style.display = 'block';
+
+    const data = await res.json();
+    document.getElementById('st-users').textContent = data.totalUsers;
+    document.getElementById('st-revenue').textContent = '₹' + (data.todayRevenue||0);
+    document.getElementById('st-pending').textContent = data.pendingWithdrawals;
+    document.getElementById('st-txns').textContent = data.totalTransactions||'-';
+
+    allUsers = data.users;
+    renderUsers(allUsers);
+
+    document.getElementById('withdraw-tbody').innerHTML = (data.withdrawals||[]).map(w => `
+      <tr>
+        <td style="font-weight:500">${w.userId?.name||'Unknown'}</td>
+        <td style="color:var(--gold)">${Math.abs(w.chips).toLocaleString()}</td>
+        <td style="color:var(--green-glow);font-weight:600">₹${w.amount}</td>
+        <td style="color:var(--gray);font-size:12px">${w.bankAccount||w.userId?.bankAccount||'N/A'}</td>
+        <td style="color:var(--gray);font-size:12px">${w.ifscCode||w.userId?.ifscCode||'N/A'}</td>
+        <td style="color:var(--gray);font-size:12px">${new Date(w.createdAt).toLocaleDateString('en-IN')}</td>
+        <td><div class="action-btns-cell">
+          <button class="btn btn-sm btn-green" onclick="approveWithdraw('${w._id}')">✅ Approve</button>
+          <button class="btn btn-sm btn-red" onclick="rejectWithdraw('${w._id}')">❌ Reject</button>
+        </div></td>
+      </tr>
+    `).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--gray);padding:20px;">No pending withdrawals</td></tr>';
+
+    document.getElementById('txn-tbody').innerHTML = (data.recentTransactions||[]).map(t => `
+      <tr>
+        <td>${t.userId?.name||'Unknown'}</td>
+        <td><span class="badge ${t.type==='buy'?'badge-green':t.type==='sell'?'badge-gold':'badge-gray'}">${t.type.toUpperCase()}</span></td>
+        <td style="color:${t.chips>0?'var(--green-glow)':'#ef9a9a'}">${t.chips>0?'+':''}${(t.chips||0).toLocaleString()}</td>
+        <td style="color:var(--white)">₹${t.amount||0}</td>
+        <td><span class="badge ${t.status==='success'?'badge-green':t.status==='pending'?'badge-gold':'badge-red'}">${t.status}</span></td>
+        <td style="color:var(--gray);font-size:12px">${new Date(t.createdAt).toLocaleDateString('en-IN')}</td>
+      </tr>
+    `).join('') || '<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:20px;">No transactions yet</td></tr>';
+  } catch(e) {
+    showToast('❌ Error loading data. Is server running?');
+  }
+}
+
+async function toggleBlock(id, isBlocked) {
+  const action = isBlocked ? 'unblock' : 'block';
+  if (!confirm(`${action} this user?`)) return;
+  try {
+    await fetch('/api/admin/' + action + '/' + id, { method:'POST', headers:{'Authorization':adminPass} });
+    showToast('✅ User ' + action + 'ed successfully');
+    loadAdmin();
+  } catch(e) { showToast('❌ Error'); }
+}
+
+async function approveWithdraw(id) {
+  if (!confirm('Did you transfer the money to their bank account? Only click OK after you have sent the money.')) return;
+  try {
+    await fetch('/api/admin/approve/' + id, { method:'POST', headers:{'Authorization':adminPass} });
+    showToast('✅ Withdrawal approved');
+    loadAdmin();
+  } catch(e) { showToast('❌ Error'); }
+}
+
+async function rejectWithdraw(id) {
+  if (!confirm('Reject this withdrawal? Chips will be refunded to user.')) return;
+  try {
+    await fetch('/api/admin/reject/' + id, { method:'POST', headers:{'Authorization':adminPass} });
+    showToast('✅ Withdrawal rejected — chips refunded to user');
+    loadAdmin();
+  } catch(e) { showToast('❌ Error'); }
+}
+
+document.addEventListener('keypress', e => { if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') adminLogin(); });
+</script>
+</body>
+</html>

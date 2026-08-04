@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>Dashboard – JeetPatti</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .dash-layout{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 60px);}
+    .sidebar{background:rgba(10,31,10,0.85);border-right:1px solid rgba(240,192,64,0.1);padding:20px 0;display:flex;flex-direction:column;}
+    .sidebar-user{padding:0 16px 20px;border-bottom:1px solid rgba(240,192,64,0.1);margin-bottom:8px;}
+    .user-av{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--green-bright),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#1a1000;margin-bottom:8px;}
+    .user-nm{font-size:15px;font-weight:600;color:var(--white);}
+    .user-em{font-size:11px;color:var(--gray);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .user-chip-pill{background:rgba(240,192,64,0.1);border:1px solid rgba(240,192,64,0.2);border-radius:var(--radius);padding:8px 10px;margin-top:10px;display:flex;align-items:center;gap:8px;}
+    .ucp-num{font-size:18px;font-weight:700;color:var(--gold);font-family:'Cinzel',serif;}
+    .ucp-lbl{font-size:10px;color:var(--gray);}
+    /* SIDEBAR NAV — no Play Teen Patti link */
+    .snav a{display:flex;align-items:center;gap:10px;padding:11px 16px;color:rgba(255,255,255,0.65);text-decoration:none;font-size:13px;font-weight:500;transition:all .2s;border-left:3px solid transparent;}
+    .snav a:hover,.snav a.active{color:var(--gold);background:rgba(240,192,64,0.07);border-left-color:var(--gold-dark);}
+    .snav a .ni{font-size:16px;width:20px;text-align:center;}
+    .main{padding:24px;overflow-y:auto;padding-bottom:80px;}
+    /* Welcome */
+    .welcome{background:linear-gradient(135deg,var(--green-table),var(--green-mid));border:1px solid rgba(240,192,64,0.2);border-radius:var(--radius-lg);padding:20px 22px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+    .welcome h2{font-size:18px;color:var(--gold);margin-bottom:3px;}
+    .welcome p{color:var(--gray);font-size:13px;}
+    /* BIG PLAY BUTTON */
+    .play-card{background:linear-gradient(135deg,#0d3b0d,#1a5c1a);border:2px solid rgba(240,192,64,0.4);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;text-decoration:none;display:block;transition:all .2s;margin-bottom:20px;box-shadow:0 4px 20px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.05);position:relative;overflow:hidden;}
+    .play-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 50%,rgba(240,192,64,0.08),transparent);pointer-events:none;}
+    .play-card:hover{border-color:var(--gold);box-shadow:0 6px 30px rgba(240,192,64,0.25);transform:translateY(-2px);}
+    .play-card .felt-icon{font-size:48px;margin-bottom:10px;display:block;filter:drop-shadow(0 0 10px rgba(240,192,64,0.3));}
+    .play-card h3{font-family:'Cinzel',serif;font-size:22px;color:var(--gold);margin-bottom:6px;letter-spacing:1px;}
+    .play-card p{font-size:13px;color:rgba(255,255,255,0.6);}
+    .online-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(76,175,80,0.15);border:1px solid rgba(76,175,80,0.3);border-radius:20px;padding:4px 12px;font-size:11px;color:#81c784;margin-top:10px;}
+    .online-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:#4caf50;animation:gp 1.5s infinite;}
+    @keyframes gp{0%,100%{opacity:1}50%{opacity:.3}}
+    /* Stats */
+    .stats-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+    .stat-card{background:var(--green-mid);border:1px solid rgba(240,192,64,0.12);border-radius:var(--radius);padding:16px 18px;}
+    .stat-card .stat-label{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+    .stat-card .stat-value{font-size:24px;font-weight:700;color:var(--gold);font-family:'Cinzel',serif;}
+    .stat-card .stat-sub{font-size:11px;color:var(--green-glow);margin-top:3px;}
+    /* Quick actions */
+    .quick-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+    .quick-card{background:var(--green-mid);border:1px solid rgba(240,192,64,0.12);border-radius:var(--radius-lg);padding:18px;text-align:center;cursor:pointer;text-decoration:none;display:block;transition:all .2s;}
+    .quick-card:hover{border-color:var(--gold-dark);box-shadow:var(--shadow-gold);}
+    .quick-card .qi{font-size:30px;margin-bottom:8px;}
+    .quick-card h3{color:var(--gold);font-size:14px;margin-bottom:4px;}
+    .quick-card p{color:var(--gray);font-size:12px;}
+    /* History */
+    .history-box{background:var(--green-mid);border:1px solid rgba(240,192,64,0.12);border-radius:var(--radius-lg);padding:18px;}
+    .history-box h3{font-family:'Cinzel',serif;color:var(--gold);font-size:14px;margin-bottom:14px;}
+    @media(max-width:900px){
+      .dash-layout{grid-template-columns:1fr;}
+      .sidebar{display:none;}
+      .main{padding:16px;padding-bottom:80px;}
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="index.html" class="brand">♣ Jeet<span>Patti</span></a>
+  <div class="nav-links">
+    <a href="buy-chips.html">Buy Chips</a>
+    <a href="sell-chips.html">Sell Chips</a>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <span class="nav-chips">🟡 <span id="nav-chips">0</span></span>
+    <button class="btn btn-gray btn-sm" onclick="logout()">Logout</button>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="dashboard.html">🏠 Dashboard</a>
+  <a href="buy-chips.html">💳 Buy Chips</a>
+  <a href="sell-chips.html">💰 Sell Chips</a>
+  <a href="history.html">📋 Game History</a>
+  <a href="profile.html">👤 My Profile</a>
+  <div class="divider-line"></div>
+  <a href="#" onclick="logout()">🚪 Logout</a>
+</div>
+<nav class="bottom-nav">
+  <a href="dashboard.html" class="active"><span class="bn-icon">🏠</span>Home</a>
+  <a href="game.html"><span class="bn-icon">🎴</span>Play</a>
+  <a href="buy-chips.html"><span class="bn-icon">💳</span>Buy</a>
+  <a href="sell-chips.html"><span class="bn-icon">💰</span>Sell</a>
+  <a href="profile.html"><span class="bn-icon">👤</span>Profile</a>
+</nav>
+
+<div class="dash-layout">
+  <aside class="sidebar">
+    <div class="sidebar-user">
+      <div class="user-av" id="av-letter">U</div>
+      <div class="user-nm" id="sb-name">Loading...</div>
+      <div class="user-em" id="sb-email"></div>
+      <div class="user-chip-pill">
+        <span>🟡</span>
+        <div><div class="ucp-num" id="sb-chips">0</div><div class="ucp-lbl">Chips (₹1 = 1 Chip)</div></div>
+      </div>
+    </div>
+    <!-- NO Play Teen Patti link here -->
+    <nav class="snav">
+      <a href="dashboard.html" class="active"><span class="ni">🏠</span> Dashboard</a>
+      <a href="buy-chips.html"><span class="ni">💳</span> Buy Chips</a>
+      <a href="sell-chips.html"><span class="ni">💰</span> Sell Chips</a>
+      <a href="history.html"><span class="ni">📋</span> Game History</a>
+      <a href="profile.html"><span class="ni">👤</span> My Profile</a>
+      <a href="#" onclick="logout()"><span class="ni">🚪</span> Logout</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <div class="welcome">
+      <div>
+        <h2>Welcome, <span id="welcome-name">Player</span>! 👋</h2>
+        <p>Ready to play? / खेलने के लिए तैयार हैं?</p>
+      </div>
+    </div>
+
+    <!-- BIG PLAY BUTTON — only one, in center -->
+    <a href="game.html" class="play-card">
+      <span class="felt-icon">🃏</span>
+      <h3>PLAY TEEN PATTI</h3>
+      <p>Tap to choose your table and start playing</p>
+      <div class="online-badge" id="online-badge">Players online now</div>
+    </a>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Chip Balance</div>
+        <div class="stat-value" id="stat-chips">0</div>
+        <div class="stat-sub">₹1 = 1 Chip</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Chips Won</div>
+        <div class="stat-value" id="stat-won" style="color:var(--green-glow)">0</div>
+        <div class="stat-sub">Lifetime winnings</div>
+      </div>
+    </div>
+
+    <div class="quick-row">
+      <a href="buy-chips.html" class="quick-card">
+        <div class="qi">💳</div>
+        <h3>Buy Chips</h3>
+        <p>₹1 = 1 Chip • Instant</p>
+      </a>
+      <a href="sell-chips.html" class="quick-card">
+        <div class="qi">💰</div>
+        <h3>Sell Chips</h3>
+        <p>Convert to real money</p>
+      </a>
+    </div>
+
+    <div class="history-box">
+      <h3>Recent Games / हाल के खेल</h3>
+      <div id="history-content"><div class="spinner"></div></div>
+    </div>
+  </main>
+</div>
+
+<div id="toast"></div>
+<script>
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
+document.addEventListener('click',function(e){const m=document.getElementById('mobile-menu');const h=document.querySelector('.hamburger');if(h&&!m.contains(e.target)&&!h.contains(e.target))m.classList.remove('open');});
+function logout(){localStorage.removeItem('token');localStorage.removeItem('user');window.location.href='login.html';}
+const token=localStorage.getItem('token');
+if(!token)window.location.href='login.html';
+document.getElementById('online-badge').textContent=(Math.floor(Math.random()*20)+8)+' players online now';
+async function loadDashboard(){
+  try{
+    const res=await fetch('/api/auth/me',{headers:{Authorization:token}});
+    if(!res.ok){logout();return;}
+    const user=await res.json();
+    document.getElementById('av-letter').textContent=user.name.charAt(0).toUpperCase();
+    document.getElementById('sb-name').textContent=user.name;
+    document.getElementById('sb-email').textContent=user.email;
+    document.getElementById('sb-chips').textContent=user.chips.toLocaleString();
+    document.getElementById('nav-chips').textContent=user.chips.toLocaleString();
+    document.getElementById('welcome-name').textContent=user.name.split(' ')[0];
+    document.getElementById('stat-chips').textContent=user.chips.toLocaleString();
+    const histRes=await fetch('/api/game/history',{headers:{Authorization:token}});
+    const history=await histRes.json();
+    let totalWon=0;history.forEach(h=>{if(h.result==='win')totalWon+=h.chipsWon;});
+    document.getElementById('stat-won').textContent=totalWon.toLocaleString();
+    if(!history.length){
+      document.getElementById('history-content').innerHTML='<p style="color:var(--gray);text-align:center;padding:24px;">No games yet. <a href="game.html" style="color:var(--gold)">Play your first game!</a></p>';
+    }else{
+      document.getElementById('history-content').innerHTML=`<div class="table-scroll"><table class="data-table"><thead><tr><th>Date</th><th>Result</th><th>Won</th><th>Lost</th></tr></thead><tbody>${history.map(h=>`<tr><td style="font-size:12px;color:var(--gray)">${new Date(h.createdAt).toLocaleDateString('en-IN')}</td><td><span class="badge ${h.result==='win'?'badge-green':'badge-red'}">${h.result==='win'?'✅ WIN':'❌ LOSS'}</span></td><td style="color:var(--green-glow)">${h.chipsWon>0?'+₹'+h.chipsWon:'-'}</td><td style="color:#ef9a9a">${h.chipsLost>0?'-₹'+h.chipsLost:'-'}</td></tr>`).join('')}</tbody></table></div>`;
+    }
+  }catch(e){document.getElementById('history-content').innerHTML='<p style="color:var(--gray);text-align:center;padding:20px;">Could not load. Is server running?</p>';}
+}
+loadDashboard();
+</script>
+</body>
+</html>

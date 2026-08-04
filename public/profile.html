@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Profile – JeetPatti</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="index.html" class="brand">♣ Jeet<span>Patti</span></a>
+  <div class="nav-links">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="game.html">Play</a>
+  </div>
+  <span class="nav-chips">🟡 <span id="nav-chips">0</span> Chips</span>
+</nav>
+<div style="max-width:600px;margin:0 auto;padding:40px 20px;">
+  <h1 style="color:var(--gold);font-size:26px;margin-bottom:28px;">My Profile / मेरी प्रोफाइल</h1>
+  <div id="alert-box"></div>
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-title">Account Details</div>
+    <div class="form-group"><label>Full Name</label><input type="text" id="p-name" readonly style="opacity:0.6"/></div>
+    <div class="form-group"><label>Email</label><input type="email" id="p-email" readonly style="opacity:0.6"/></div>
+    <div class="form-group"><label>Phone</label><input type="tel" id="p-phone" readonly style="opacity:0.6"/></div>
+    <div class="form-group"><label>Chip Balance</label><input type="text" id="p-chips" readonly style="opacity:0.6;color:var(--gold)"/></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Bank Details for Withdrawal / बैंक विवरण</div>
+    <p style="color:var(--gray);font-size:13px;margin-bottom:16px;">Required to sell chips and receive money</p>
+    <div class="form-group"><label>Bank Account Number</label><input type="text" id="bank-acc" placeholder="Your bank account number"/></div>
+    <div class="form-group"><label>IFSC Code</label><input type="text" id="bank-ifsc" placeholder="e.g. HDFC0001234"/></div>
+    <div class="form-group"><label>Account Holder Name</label><input type="text" id="bank-name" placeholder="Name as in bank"/></div>
+    <button class="btn btn-gold btn-full" onclick="saveBank()" id="save-btn">💾 Save Bank Details</button>
+  </div>
+</div>
+<div id="toast"></div>
+<script>
+const token = localStorage.getItem('token');
+if (!token) window.location.href = 'login.html';
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+function showAlert(msg, type) { document.getElementById('alert-box').innerHTML = '<div class="alert alert-' + type + '">' + msg + '</div>'; }
+async function load() {
+  const res = await fetch('/api/auth/me', { headers: { 'Authorization': token } });
+  const u = await res.json();
+  document.getElementById('p-name').value = u.name;
+  document.getElementById('p-email').value = u.email;
+  document.getElementById('p-phone').value = u.phone;
+  document.getElementById('p-chips').value = u.chips.toLocaleString() + ' chips';
+  document.getElementById('nav-chips').textContent = u.chips.toLocaleString();
+  if (u.bankAccount) document.getElementById('bank-acc').value = u.bankAccount;
+  if (u.ifscCode) document.getElementById('bank-ifsc').value = u.ifscCode;
+  if (u.accountName) document.getElementById('bank-name').value = u.accountName;
+}
+async function saveBank() {
+  const bankAccount = document.getElementById('bank-acc').value.trim();
+  const ifscCode = document.getElementById('bank-ifsc').value.trim().toUpperCase();
+  const accountName = document.getElementById('bank-name').value.trim();
+  if (!bankAccount || !ifscCode || !accountName) return showAlert('Please fill all bank fields', 'error');
+  const btn = document.getElementById('save-btn'); btn.textContent = 'Saving...'; btn.disabled = true;
+  try {
+    const res = await fetch('/api/auth/update-bank', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': token }, body: JSON.stringify({ bankAccount, ifscCode, accountName }) });
+    const d = await res.json();
+    if (d.success) showToast('✅ Bank details saved!');
+    else showAlert(d.error || 'Error', 'error');
+  } catch(e) { showAlert('Server error', 'error'); }
+  btn.textContent = '💾 Save Bank Details'; btn.disabled = false;
+}
+load();
+</script>
+</body>
+</html>

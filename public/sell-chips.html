@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Withdraw — JeetPatti</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#0a0006;min-height:100vh;
+  background-image:radial-gradient(ellipse 130% 60% at 50% -5%,rgba(160,10,30,.5),transparent 55%),linear-gradient(180deg,#0a0006,#160005);}
+.bar{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;
+  background:rgba(10,0,6,.97);border-bottom:1px solid rgba(240,192,64,.2);}
+.logo{font-family:'Cinzel',serif;font-size:19px;font-weight:900;color:#f0c040;text-decoration:none;letter-spacing:2px;}
+.logo b{color:#ffab91;}
+.back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;font-weight:700;}
+.wrap{max-width:480px;margin:0 auto;padding:24px 18px 60px;}
+
+.bal-card{background:rgba(76,175,80,.1);border:1px solid rgba(76,175,80,.3);border-radius:16px;
+  padding:20px;text-align:center;margin-bottom:20px;}
+.bal-label{color:rgba(255,255,255,.5);font-size:12px;}
+.bal-amt{color:#81c784;font-size:28px;font-weight:900;margin-top:6px;}
+
+.soon-badge{background:linear-gradient(135deg,rgba(240,192,64,.15),rgba(240,192,64,.05));
+  border:1px solid rgba(240,192,64,.4);border-radius:16px;padding:16px;text-align:center;margin-bottom:22px;}
+.soon-badge .t1{color:#f0c040;font-weight:900;font-size:15px;margin-bottom:4px;}
+.soon-badge .t2{color:rgba(255,255,255,.5);font-size:12px;line-height:1.6;}
+
+.label{color:rgba(255,255,255,.5);font-size:12px;margin-bottom:8px;display:block;font-weight:600;}
+.input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;padding:14px;color:#fff;font-size:15px;margin-bottom:18px;font-family:inherit;}
+.input::placeholder{color:#555;}
+
+.wa-box{background:linear-gradient(135deg,#0d3b1e,#0a2814);border:1px solid rgba(76,175,80,.4);
+  border-radius:18px;padding:20px;text-align:center;margin-top:10px;}
+.wa-icon{font-size:38px;margin-bottom:8px;}
+.wa-title{color:#fff;font-weight:900;font-size:15px;margin-bottom:6px;}
+.wa-sub{color:rgba(255,255,255,.55);font-size:12px;line-height:1.7;margin-bottom:16px;}
+.wa-btn{display:block;background:#25D366;color:#fff;text-decoration:none;font-weight:900;
+  font-size:14px;padding:13px;border-radius:26px;text-align:center;border:none;width:100%;cursor:pointer;}
+.wa-btn:active{transform:scale(.98);}
+.wa-btn:disabled{opacity:.4;}
+
+.steps{margin-top:24px;background:rgba(255,255,255,.03);border-radius:14px;padding:16px;}
+.steps .st-title{color:#f0c040;font-weight:800;font-size:13px;margin-bottom:10px;}
+.steps ol{margin-left:18px;color:rgba(255,255,255,.55);font-size:12px;line-height:2;}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="dashboard.html" class="back">← Back</a>
+  <a href="index.html" class="logo">♣ Jeet<b>Patti</b></a>
+  <div style="width:50px"></div>
+</div>
+
+<div class="wrap">
+  <div class="bal-card">
+    <div class="bal-label">Available Balance</div>
+    <div class="bal-amt" id="balAmt">₹0</div>
+  </div>
+
+  <div class="soon-badge">
+    <div class="t1">💳 Automatic Withdrawal Coming Soon</div>
+    <div class="t2">For now, withdrawals are handled manually over WhatsApp so you get paid directly, fast.</div>
+  </div>
+
+  <label class="label">Chips to withdraw (minimum 1,000)</label>
+  <input type="number" class="input" id="chipsInput" placeholder="Enter chip amount" min="1000">
+
+  <label class="label">Your UPI ID (where we'll send the money)</label>
+  <input type="text" class="input" id="upiInput" placeholder="yourname@upi">
+
+  <div class="wa-box">
+    <div class="wa-icon">💬</div>
+    <div class="wa-title">Withdraw via WhatsApp</div>
+    <div class="wa-sub">Tap below to message us directly.<br>We'll verify your balance and transfer the amount to your UPI ID.</div>
+    <button class="wa-btn" id="waBtn" onclick="startWithdraw()">📲 Message Us on WhatsApp</button>
+  </div>
+
+  <div class="steps">
+    <div class="st-title">How it works</div>
+    <ol>
+      <li>Enter the chips you want to withdraw</li>
+      <li>Enter your UPI ID</li>
+      <li>Tap "Message Us on WhatsApp"</li>
+      <li>We verify your balance and confirm</li>
+      <li>Money is sent to your UPI within a few hours, and your chip balance is updated once confirmed</li>
+    </ol>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+// PUT YOUR WHATSAPP NUMBER HERE — with country code, no
+// spaces, no +, no dashes. Example for India: 919876543210
+// ══════════════════════════════════════════════════════
+const WHATSAPP_NUMBER = "91XXXXXXXXXX"; // ← REPLACE THIS WITH YOUR REAL NUMBER
+const API_URL = "/api"; // change if your backend runs elsewhere
+
+const TK = localStorage.getItem('token');
+if(!TK) window.location.href = 'login.html';
+
+let currentBalance = 0;
+let userInfo = { name: 'Unknown', phone: 'Not available', id: 'Unknown' };
+let sending = false;
+
+// Only reads balance/identity — never calls any deduction endpoint,
+// so it can't be blocked by backend fields this page doesn't collect
+// (like bank account details from the old automatic payout system).
+async function loadBalance(){
+  try{
+    const res = await fetch(`${API_URL}/auth/me`, { headers: { Authorization: TK } });
+    const data = await res.json();
+    currentBalance = data.chips || 0;
+    userInfo.name = data.name || 'Unknown';
+    userInfo.phone = data.phone || 'Not available';
+    userInfo.id = data._id || data.id || 'Unknown';
+    document.getElementById('balAmt').textContent = '₹' + currentBalance.toLocaleString();
+  }catch(e){}
+}
+loadBalance();
+
+function startWithdraw(){
+  if(sending)return;
+
+  const chips = parseInt(document.getElementById('chipsInput').value) || 0;
+  const upi = document.getElementById('upiInput').value.trim();
+
+  // ══ VALIDATION — block entirely if anything is wrong ══
+  if(chips < 1000){
+    alert('⚠️ Minimum withdrawal is 1,000 chips');
+    return;
+  }
+  if(!upi){
+    alert('⚠️ Please enter your UPI ID');
+    return;
+  }
+  if(chips > currentBalance){
+    alert(`⚠️ You only have ₹${currentBalance.toLocaleString()} chips.\nYou cannot withdraw more than your available balance.`);
+    return;
+  }
+
+  sending = true;
+  const btn = document.getElementById('waBtn');
+  btn.disabled = true;
+  btn.textContent = 'Opening WhatsApp...';
+
+  // Open WhatsApp directly with full details so the amount can be
+  // verified and paid manually — no backend call, so nothing here
+  // can fail on a field this form doesn't ask for.
+  const msg =
+`Hi! I want to withdraw chips from JeetPatti.
+
+Chips: ${chips.toLocaleString()} (₹${chips.toLocaleString()})
+My UPI ID: ${upi}
+
+── My Account ──
+Name: ${userInfo.name}
+Phone: ${userInfo.phone}
+User ID: ${userInfo.id}`;
+
+  const link = `https://wa.me/${7899735805}?text=${encodeURIComponent(msg)}`;
+  window.open(link, '_blank');
+
+  btn.textContent = '✅ Sent — check WhatsApp';
+  document.getElementById('chipsInput').value = '';
+
+  setTimeout(()=>{
+    sending = false;
+    btn.disabled = false;
+    btn.textContent = '📲 Message Us on WhatsApp';
+  }, 4000);
+}
+</script>
+</body>
+</html>
