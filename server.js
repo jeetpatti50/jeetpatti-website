@@ -32,7 +32,11 @@ mongoose.connect(process.env.MONGO_URI, {
   serverSelectionTimeoutMS: 30000
 })
 .then(() => console.log('✅ Database connected!'))
-.catch(err => console.log('❌ Database error:', err.message));
+.catch(err => {
+  console.log('❌ Database error:', err.message);
+  console.log('⚠️  Signups/logins will NOT work until the DB connects.');
+  console.log('   → Check MongoDB Atlas: whitelist your IP (Network Access) and make sure the cluster is not paused.');
+});
 
 app.use('/api/auth',  require('./routes/auth'));
 app.use('/api/chips', require('./routes/chips'));
