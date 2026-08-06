@@ -16,7 +16,7 @@
     <a href="dashboard.html">Dashboard</a>
     <a href="game.html">Play</a>
   </div>
-  <span class="nav-chips">🟡 <span id="nav-chips">0</span> Chips</span>
+  <span class="nav-chips"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg> <span id="nav-chips">0</span> Chips</span>
 </nav>
 <div style="max-width:600px;margin:0 auto;padding:40px 20px;">
   <h1 style="color:var(--gold);font-size:26px;margin-bottom:28px;">My Profile / मेरी प्रोफाइल</h1>
@@ -34,14 +34,14 @@
     <div class="form-group"><label>Bank Account Number</label><input type="text" id="bank-acc" placeholder="Your bank account number"/></div>
     <div class="form-group"><label>IFSC Code</label><input type="text" id="bank-ifsc" placeholder="e.g. HDFC0001234"/></div>
     <div class="form-group"><label>Account Holder Name</label><input type="text" id="bank-name" placeholder="Name as in bank"/></div>
-    <button class="btn btn-gold btn-full" onclick="saveBank()" id="save-btn">💾 Save Bank Details</button>
+    <button class="btn btn-gold btn-full" onclick="saveBank()" id="save-btn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg> Save Bank Details</button>
   </div>
 </div>
 <div id="toast"></div>
 <script>
 const token = localStorage.getItem('token');
 if (!token) window.location.href = 'login.html';
-function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+function showToast(msg) { const t = document.getElementById('toast'); t.innerHTML = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
 function showAlert(msg, type) { document.getElementById('alert-box').innerHTML = '<div class="alert alert-' + type + '">' + msg + '</div>'; }
 async function load() {
   const res = await fetch('/api/auth/me', { headers: { 'Authorization': token } });
@@ -64,10 +64,10 @@ async function saveBank() {
   try {
     const res = await fetch('/api/auth/update-bank', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': token }, body: JSON.stringify({ bankAccount, ifscCode, accountName }) });
     const d = await res.json();
-    if (d.success) showToast('✅ Bank details saved!');
+    if (d.success) showToast('<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg> Bank details saved!');
     else showAlert(d.error || 'Error', 'error');
   } catch(e) { showAlert('Server error', 'error'); }
-  btn.textContent = '💾 Save Bank Details'; btn.disabled = false;
+  btn.innerHTML = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg> Save Bank Details'; btn.disabled = false;
 }
 load();
 </script>

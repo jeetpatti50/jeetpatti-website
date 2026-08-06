@@ -63,7 +63,7 @@ body{font-family:'Inter',sans-serif;background:#0a0006;min-height:100vh;
   </div>
 
   <div class="soon-badge">
-    <div class="t1">💳 Automatic Withdrawal Coming Soon</div>
+    <div class="t1"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Automatic Withdrawal Coming Soon</div>
     <div class="t2">For now, withdrawals are handled manually over WhatsApp so you get paid directly, fast.</div>
   </div>
 
@@ -74,10 +74,10 @@ body{font-family:'Inter',sans-serif;background:#0a0006;min-height:100vh;
   <input type="text" class="input" id="upiInput" placeholder="yourname@upi">
 
   <div class="wa-box">
-    <div class="wa-icon">💬</div>
+    <div class="wa-icon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
     <div class="wa-title">Withdraw via WhatsApp</div>
     <div class="wa-sub">Tap below to message us directly.<br>We'll verify your balance and transfer the amount to your UPI ID.</div>
-    <button class="wa-btn" id="waBtn" onclick="startWithdraw()">📲 Message Us on WhatsApp</button>
+    <button class="wa-btn" id="waBtn" onclick="startWithdraw()"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg> Message Us on WhatsApp</button>
   </div>
 
   <div class="steps">
@@ -131,15 +131,15 @@ function startWithdraw(){
 
   // ══ VALIDATION — block entirely if anything is wrong ══
   if(chips < 1000){
-    alert('⚠️ Minimum withdrawal is 1,000 chips');
+    alert('Minimum withdrawal is 1,000 chips');
     return;
   }
   if(!upi){
-    alert('⚠️ Please enter your UPI ID');
+    alert('Please enter your UPI ID');
     return;
   }
   if(chips > currentBalance){
-    alert(`⚠️ You only have ₹${currentBalance.toLocaleString()} chips.\nYou cannot withdraw more than your available balance.`);
+    alert(`You only have ₹${currentBalance.toLocaleString()} chips.\nYou cannot withdraw more than your available balance.`);
     return;
   }
 
@@ -165,13 +165,13 @@ User ID: ${userInfo.id}`;
   const link = `https://wa.me/${7899735805}?text=${encodeURIComponent(msg)}`;
   window.open(link, '_blank');
 
-  btn.textContent = '✅ Sent — check WhatsApp';
+  btn.innerHTML = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg> Sent — check WhatsApp';
   document.getElementById('chipsInput').value = '';
 
   setTimeout(()=>{
     sending = false;
     btn.disabled = false;
-    btn.textContent = '📲 Message Us on WhatsApp';
+    btn.innerHTML = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg> Message Us on WhatsApp';
   }, 4000);
 }
 </script>

@@ -16,7 +16,7 @@
     <a href="dashboard.html">Dashboard</a>
     <a href="game.html">Play</a>
   </div>
-  <span class="nav-chips">🟡 <span id="nav-chips">0</span> Chips</span>
+  <span class="nav-chips"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3h4"/></svg> <span id="nav-chips">0</span> Chips</span>
 </nav>
 <div style="max-width:900px;margin:0 auto;padding:40px 20px;">
   <h1 style="color:var(--gold);font-size:26px;margin-bottom:6px;">Game History / गेम इतिहास</h1>
@@ -46,7 +46,7 @@ async function load() {
           <tr>
             <td style="color:var(--gray)">${i + 1}</td>
             <td style="color:var(--gray);font-size:12px">${new Date(h.createdAt).toLocaleString('en-IN')}</td>
-            <td><span class="badge ${h.result === 'win' ? 'badge-green' : 'badge-red'}">${h.result === 'win' ? '✅ WIN' : '❌ LOSS'}</span></td>
+            <td><span class="badge ${h.result === 'win' ? 'badge-green' : 'badge-red'}">${h.result === 'win' ? '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg> WIN' : '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg> LOSS'}</span></td>
             <td style="font-size:12px;color:var(--gray)">${(h.playerCards || []).join(', ') || '-'}</td>
             <td style="color:var(--green-glow);font-weight:600">${h.chipsWon > 0 ? '+' + h.chipsWon : '-'}</td>
             <td style="color:#ef9a9a">${h.chipsLost > 0 ? '-' + h.chipsLost : '-'}</td>

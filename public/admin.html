@@ -33,7 +33,7 @@
 <div id="login-screen" style="min-height:90vh;display:flex;align-items:center;justify-content:center;padding:20px;">
   <div style="max-width:380px;width:100%;">
     <div style="text-align:center;margin-bottom:28px;">
-      <h2 style="color:var(--gold);font-size:22px;">🔐 Admin Login</h2>
+      <h2 style="color:var(--gold);font-size:22px;"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Admin Login</h2>
       <p style="color:var(--gray);font-size:14px;">Enter admin password to continue</p>
     </div>
     <div class="card">
@@ -54,7 +54,7 @@
         <h1 style="font-size:22px;color:var(--gold);margin-bottom:4px;">Admin Dashboard</h1>
         <p style="color:var(--gray);font-size:13px;">Manage all users, payments and withdrawals</p>
       </div>
-      <button class="btn btn-green btn-sm" onclick="loadAdmin()">🔄 Refresh</button>
+      <button class="btn btn-green btn-sm" onclick="loadAdmin()"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 4v4h4"/></svg> Refresh</button>
     </div>
 
     <div class="stats-row" id="admin-stats">
@@ -65,9 +65,9 @@
     </div>
 
     <div class="admin-tabs">
-      <button class="tab-btn active" onclick="switchTab('users')">👥 Users</button>
-      <button class="tab-btn" onclick="switchTab('withdrawals')">💰 Withdrawals</button>
-      <button class="tab-btn" onclick="switchTab('transactions')">📋 All Transactions</button>
+      <button class="tab-btn active" onclick="switchTab('users')"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Users</button>
+      <button class="tab-btn" onclick="switchTab('withdrawals')"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/></svg> Withdrawals</button>
+      <button class="tab-btn" onclick="switchTab('transactions')"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> All Transactions</button>
     </div>
 
     <!-- Users Tab -->
@@ -112,7 +112,7 @@ let adminPass = '';
 let allUsers = [];
 
 function showToast(msg) {
-  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  const t = document.getElementById('toast'); t.innerHTML = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3500);
 }
 
@@ -187,8 +187,8 @@ async function loadAdmin() {
         <td style="color:var(--gray);font-size:12px">${w.ifscCode||w.userId?.ifscCode||'N/A'}</td>
         <td style="color:var(--gray);font-size:12px">${new Date(w.createdAt).toLocaleDateString('en-IN')}</td>
         <td><div class="action-btns-cell">
-          <button class="btn btn-sm btn-green" onclick="approveWithdraw('${w._id}')">✅ Approve</button>
-          <button class="btn btn-sm btn-red" onclick="rejectWithdraw('${w._id}')">❌ Reject</button>
+          <button class="btn btn-sm btn-green" onclick="approveWithdraw('${w._id}')"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg> Approve</button>
+          <button class="btn btn-sm btn-red" onclick="rejectWithdraw('${w._id}')"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg> Reject</button>
         </div></td>
       </tr>
     `).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--gray);padding:20px;">No pending withdrawals</td></tr>';
@@ -204,7 +204,7 @@ async function loadAdmin() {
       </tr>
     `).join('') || '<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:20px;">No transactions yet</td></tr>';
   } catch(e) {
-    showToast('❌ Error loading data. Is server running?');
+    showToast('<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg> Error loading data. Is server running?');
   }
 }
 
@@ -213,27 +213,27 @@ async function toggleBlock(id, isBlocked) {
   if (!confirm(`${action} this user?`)) return;
   try {
     await fetch('/api/admin/' + action + '/' + id, { method:'POST', headers:{'Authorization':adminPass} });
-    showToast('✅ User ' + action + 'ed successfully');
+    showToast('<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg> User ' + action + 'ed successfully');
     loadAdmin();
-  } catch(e) { showToast('❌ Error'); }
+  } catch(e) { showToast('<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg> Error'); }
 }
 
 async function approveWithdraw(id) {
   if (!confirm('Did you transfer the money to their bank account? Only click OK after you have sent the money.')) return;
   try {
     await fetch('/api/admin/approve/' + id, { method:'POST', headers:{'Authorization':adminPass} });
-    showToast('✅ Withdrawal approved');
+    showToast('<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg> Withdrawal approved');
     loadAdmin();
-  } catch(e) { showToast('❌ Error'); }
+  } catch(e) { showToast('<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg> Error'); }
 }
 
 async function rejectWithdraw(id) {
   if (!confirm('Reject this withdrawal? Chips will be refunded to user.')) return;
   try {
     await fetch('/api/admin/reject/' + id, { method:'POST', headers:{'Authorization':adminPass} });
-    showToast('✅ Withdrawal rejected — chips refunded to user');
+    showToast('<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg> Withdrawal rejected — chips refunded to user');
     loadAdmin();
-  } catch(e) { showToast('❌ Error'); }
+  } catch(e) { showToast('<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg> Error'); }
 }
 
 document.addEventListener('keypress', e => { if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') adminLogin(); });

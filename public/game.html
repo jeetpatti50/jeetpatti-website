@@ -343,7 +343,7 @@ html,body{width:100%;height:100vh;height:100dvh;overflow:hidden;font-family:'Int
 <body>
 <!-- Fallback rotate prompt — only appears if auto-rotate isn't allowed by the phone -->
 <div id="rotate-ov">
-  <div class="rot-icon">📱</div>
+  <div class="rot-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
   <div class="rot-title">Please Rotate Your Phone</div>
   <div class="rot-sub">Turn your phone sideways for the best Teen Patti experience</div>
 </div>
@@ -357,7 +357,7 @@ html,body{width:100%;height:100vh;height:100dvh;overflow:hidden;font-family:'Int
   <div class="barr">
     <a href="buy-chips.html" class="xb xa">ADD</a>
     <a href="sell-chips.html" class="xb xw">Withdraw</a>
-    <button class="xb xc" id="xchg" onclick="showTS()" style="display:none">⇄ Table</button>
+    <button class="xb xc" id="xchg" onclick="showTS()" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M7 4v13M4 14l3 3 3-3M17 20V7M14 10l3-3 3 3"/></svg> Table</button>
     <a href="dashboard.html" class="xb xe">Exit</a>
   </div>
 </div>
@@ -375,13 +375,13 @@ html,body{width:100%;height:100vh;height:100dvh;overflow:hidden;font-family:'Int
   <div id="spr" style="display:none">
     <div class="tshd"><span>Boot</span><span>Min Buyin</span><span>Online Players</span><span style="text-align:right">Join</span></div>
     <div id="lpr"></div>
-    <div class="prnote">🎁 Practice with virtual chips — no real money used</div>
+    <div class="prnote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9"/><path d="M12 8C12 8 11 3 8 3a2.5 2.5 0 0 0 0 5zM12 8c0 0 1-5 4-5a2.5 2.5 0 0 1 0 5z"/></svg> Practice with virtual chips — no real money used</div>
   </div>
 </div>
 
 <!-- JOINING -->
 <div id="jov">
-  <div class="ji" id="ji">🃏</div>
+  <div class="ji" id="ji" style="color:#f0c040"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M12 3C9 7 5 8.5 5 12a3 3 0 0 0 5 2c-.4 2-1 3-2 4h8c-1-1-1.6-2-2-4a3 3 0 0 0 5-2c0-3.5-4-5-7-9z"/></svg></div>
   <div class="jtt" id="jtt">Finding best match...</div>
   <div class="jdots"><span></span><span></span><span></span></div>
   <div class="jsteps" id="jsteps"></div>
@@ -447,7 +447,7 @@ html,body{width:100%;height:100vh;height:100dvh;overflow:hidden;font-family:'Int
           <div class="tmrow"><div class="tmr" id="tm0"></div></div>
           <div class="bdg bi" id="bd0" style="margin-bottom:2px"></div>
           <div class="cf" id="cfy"><div class="card fd"></div><div class="card fd"></div><div class="card fd"></div></div>
-          <button class="seebtn" id="seebtn" onclick="reveal()">👁 See Cards</button>
+          <button class="seebtn" id="seebtn" onclick="reveal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg> See Cards</button>
           <div class="av you" id="avy" style="margin-top:4px">😎</div>
           <div class="nm you" id="yn">You</div>
           <div class="sbet" id="sb0"></div>
@@ -472,11 +472,11 @@ html,body{width:100%;height:100vh;height:100dvh;overflow:hidden;font-family:'Int
       <div class="bchip ch1k"   onclick="sbet(1000,this)" id="bc1k">₹1K</div>
     </div>
     <div class="actr">
-      <button class="ab adeal" id="bdeal" onclick="deal()">🃏 DEAL</button>
-      <button class="ab acall" id="bcall" onclick="pa('call')"  style="display:none">✅ CALL</button>
-      <button class="ab araise"id="braise"onclick="pa('raise')" style="display:none">⬆ RAISE</button>
-      <button class="ab afold" id="bfold" onclick="pa('fold')"  style="display:none">❌ FOLD</button>
-      <button class="ab ashow" id="bshow" onclick="pa('show')"  style="display:none">👁 SHOW</button>
+      <button class="ab adeal" id="bdeal" onclick="deal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M12 3C9 7 5 8.5 5 12a3 3 0 0 0 5 2c-.4 2-1 3-2 4h8c-1-1-1.6-2-2-4a3 3 0 0 0 5-2c0-3.5-4-5-7-9z"/></svg> DEAL</button>
+      <button class="ab acall" id="bcall" onclick="pa('call')"  style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg> CALL</button>
+      <button class="ab araise"id="braise"onclick="pa('raise')" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M12 20V8M6 12l6-6 6 6"/><path d="M4 20h16"/></svg> RAISE</button>
+      <button class="ab afold" id="bfold" onclick="pa('fold')"  style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg> FOLD</button>
+      <button class="ab ashow" id="bshow" onclick="pa('show')"  style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg> SHOW</button>
     </div>
   </div>
 </div><!-- /gs -->
@@ -485,14 +485,14 @@ html,body{width:100%;height:100vh;height:100dvh;overflow:hidden;font-family:'Int
 <!-- RESULT -->
 <div id="rov">
   <div class="rbox">
-    <div class="ric" id="ric">🎉</div>
+    <div class="ric" id="ric" style="color:#f0c040"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3"/></svg></div>
     <div class="rt" id="rtt">You Won!</div>
     <div class="ra" id="ra"></div>
     <div class="ahs" id="ahs"></div>
     <div class="rbs">
-      <button class="rb rg" onclick="again()">🎴 Play Again</button>
-      <button class="rb rp" onclick="showTS()">⇄ Change Table</button>
-      <a href="dashboard.html" class="rb ro">🏠 Home</a>
+      <button class="rb rg" onclick="again()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M12 3C9 7 5 8.5 5 12a3 3 0 0 0 5 2c-.4 2-1 3-2 4h8c-1-1-1.6-2-2-4a3 3 0 0 0 5-2c0-3.5-4-5-7-9z"/></svg> Play Again</button>
+      <button class="rb rp" onclick="showTS()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M7 4v13M4 14l3 3 3-3M17 20V7M14 10l3-3 3 3"/></svg> Change Table</button>
+      <a href="dashboard.html" class="rb ro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg> Home</a>
     </div>
   </div>
 </div>
@@ -500,12 +500,12 @@ html,body{width:100%;height:100vh;height:100dvh;overflow:hidden;font-family:'Int
 <!-- LOW CHIPS -->
 <div id="lcov">
   <div class="lcbox">
-    <div class="lci">💸</div>
+    <div class="lci" style="color:#ff5252"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></div>
     <div class="lct">Chips Khatam!</div>
     <div class="lcs" id="lcsub">Opponents are waiting!<br>Add cash now or auto-fold in:</div>
     <div class="lcnum" id="lcnum">30</div>
     <div class="lcbs">
-      <a href="buy-chips.html" class="rb rg">💳 Add Cash</a>
+      <a href="buy-chips.html" class="rb rg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Add Cash</a>
       <button class="rb ro" onclick="lcFold()">Fold &amp; Exit</button>
     </div>
   </div>
@@ -515,6 +515,29 @@ html,body{width:100%;height:100vh;height:100dvh;overflow:hidden;font-family:'Int
 // ── AUTH ──
 const TK=localStorage.getItem('token');
 if(!TK)window.location.href='login.html';
+
+// ── INLINE SVG UI ICONS (decorative chrome only — card suits & player avatars are untouched) ──
+const _IS='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em">',_IE='</svg>';
+const IC={
+  cards:_IS+'<path d="M12 3C9 7 5 8.5 5 12a3 3 0 0 0 5 2c-.4 2-1 3-2 4h8c-1-1-1.6-2-2-4a3 3 0 0 0 5-2c0-3.5-4-5-7-9z"/>'+_IE,
+  check:_IS+'<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/>'+_IE,
+  x:_IS+'<circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/>'+_IE,
+  up:_IS+'<path d="M12 20V8M6 12l6-6 6 6"/><path d="M4 20h16"/>'+_IE,
+  eye:_IS+'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>'+_IE,
+  swap:_IS+'<path d="M7 4v13M4 14l3 3 3-3M17 20V7M14 10l3-3 3 3"/>'+_IE,
+  home:_IS+'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>'+_IE,
+  gift:_IS+'<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9"/><path d="M12 8C12 8 11 3 8 3a2.5 2.5 0 0 0 0 5zM12 8c0 0 1-5 4-5a2.5 2.5 0 0 1 0 5z"/>'+_IE,
+  card:_IS+'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>'+_IE,
+  coins:_IS+'<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/>'+_IE,
+  coin:_IS+'<circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3h4"/>'+_IE,
+  users:_IS+'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'+_IE,
+  user:_IS+'<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>'+_IE,
+  trophy:_IS+'<path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3"/>'+_IE,
+  clock:_IS+'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'+_IE,
+  lock:_IS+'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>'+_IE,
+  search:_IS+'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/>'+_IE,
+  mobile:_IS+'<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/>'+_IE,
+};
 
 // ══════════════════════════════════════════════
 //  FULLSCREEN + AUTO-LANDSCAPE
@@ -744,7 +767,7 @@ function rList(cid,tables,pr){
     return`<div class="trow${t.best?' best':''}">
       <div class="tbt">₹${t.bt}</div>
       <div class="tby">₹${(t.by||5000).toLocaleString()}</div>
-      <div class="tpl">${t.best?'<span class="btag">👑 Best</span>':''}<span class="pc">👥 ${pl.toLocaleString()}</span></div>
+      <div class="tpl">${t.best?'<span class="btag">👑 Best</span>':''}<span class="pc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> ${pl.toLocaleString()}</span></div>
       <div class="tj">${ok
         ?`<button class="pbtn" onclick="event.stopPropagation();join('${t.id}',${t.bt},${t.by||5000},${pr})">Play Now</button>`
         :`<button class="addc" onclick="event.stopPropagation();location.href='buy-chips.html'">Add Cash</button>`
@@ -759,22 +782,22 @@ async function join(id,bt,by,pr){
   curT={id,bt,by,mn:bt,mx:by};isPr=pr||false;betV=bt;opp=pick2();
   document.getElementById('ts').style.display='none';
   const ov=document.getElementById('jov');ov.classList.add('show');
-  document.getElementById('ji').textContent=isPr?'🎁':'🃏';
+  document.getElementById('ji').innerHTML=isPr?IC.gift:IC.cards;
   document.getElementById('jtt').textContent='Finding best match...';
   const steps=[
-    {i:'🔐',t:'Verifying account...',ms:500},
-    {i:'🔍',t:'Scanning live tables...',ms:700},
-    {i:'🤝',t:'Connecting to '+opp[0].n+'...',ms:700},
-    {i:'👤',t:'Connecting to '+opp[1].n+'...',ms:600},
-    {i:'🃏',t:'Shuffling deck...',ms:500},
-    {i:'✅',t:'All set! Good luck!',ms:300},
+    {i:IC.lock,t:'Verifying account...',ms:500},
+    {i:IC.search,t:'Scanning live tables...',ms:700},
+    {i:IC.users,t:'Connecting to '+opp[0].n+'...',ms:700},
+    {i:IC.user,t:'Connecting to '+opp[1].n+'...',ms:600},
+    {i:IC.cards,t:'Shuffling deck...',ms:500},
+    {i:IC.check,t:'All set! Good luck!',ms:300},
   ];
   const se=document.getElementById('jsteps');
-  se.innerHTML=steps.map((_,i)=>`<div class="jstep" id="js${i}"><span style="width:20px;display:inline-block">⏳</span>${steps[i].t}</div>`).join('');
+  se.innerHTML=steps.map((_,i)=>`<div class="jstep" id="js${i}"><span style="width:20px;display:inline-block">${IC.clock}</span>${steps[i].t}</div>`).join('');
   for(let i=0;i<steps.length;i++){
     await dl(steps[i].ms);
     const el=document.getElementById('js'+i);if(!el)continue;
-    el.className='jstep a';el.querySelector('span').textContent=steps[i].i;
+    el.className='jstep a';el.querySelector('span').innerHTML=steps[i].i;
     if(i>0){const p=document.getElementById('js'+(i-1));if(p)p.className='jstep d';}
   }
   await dl(350);ov.classList.remove('show');
@@ -825,7 +848,7 @@ function setStat(t,s=''){
 }
 function setBdg(id,txt,cls){
   const e=document.getElementById('bd'+id);
-  if(e){e.textContent=txt;e.className='bdg '+cls;}
+  if(e){e.innerHTML=txt;e.className='bdg '+cls;}
 }
 function setThink(id,on){
   const sr=document.getElementById('sr'+id);if(!sr)return;
@@ -864,8 +887,8 @@ function unlockA(){
 function coinFly(el,n=2){
   if(!el)return;const r=el.getBoundingClientRect();
   for(let i=0;i<n;i++)setTimeout(()=>{
-    const c=document.createElement('div');c.className='coin';c.textContent='🪙';
-    c.style.cssText=`left:${r.left+r.width/2-6+rnd(-7,7)}px;top:${r.top}px;`;
+    const c=document.createElement('div');c.className='coin';c.innerHTML=IC.coin;
+    c.style.cssText=`left:${r.left+r.width/2-6+rnd(-7,7)}px;top:${r.top}px;color:#ffc107;`;
     document.body.appendChild(c);setTimeout(()=>c.remove(),880);
   },i*75);
 }
@@ -877,7 +900,7 @@ function chatBub(sid,msg){
 }
 function showTick(name,amt){
   const t=document.getElementById('wtick');if(!t)return;
-  t.textContent=`🏆 [${name}] winning [₹${amt}]`;t.classList.add('show');
+  t.innerHTML=`${IC.trophy} [${name}] winning [₹${amt}]`;t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),4000);
 }
 function sbet(a,el){betV=a;document.querySelectorAll('.bchip').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
@@ -887,12 +910,12 @@ function startT(id,sec,cb){
   stopT(id);
   const el=document.getElementById('tm'+id);if(!el)return;
   let left=sec;
-  el.textContent='⏱ '+left+'s';el.classList.add('on');el.classList.remove('urg');
+  el.innerHTML=IC.clock+' '+left+'s';el.classList.add('on');el.classList.remove('urg');
   TMRS[id]=setInterval(()=>{
     if(PAUSED)return;
     left--;
     if(left<=0){stopT(id);if(cb)cb();return;}
-    el.textContent='⏱ '+left+'s';
+    el.innerHTML=IC.clock+' '+left+'s';
     if(left<=6)el.classList.add('urg');
   },1000);
 }
@@ -937,8 +960,8 @@ async function deal(){
     try{
       const r=await fetch('/api/game/start',{method:'POST',headers:{'Content-Type':'application/json',Authorization:TK},body:JSON.stringify({bet:betV})});
       const d=await r.json();
-      if(!d.success){alert(d.error||'Error');db.disabled=false;db.textContent='🃏 DEAL';return;}
-    }catch(e){alert('Server error');db.disabled=false;db.textContent='🃏 DEAL';return;}
+      if(!d.success){alert(d.error||'Error');db.disabled=false;db.innerHTML=IC.cards+' DEAL';return;}
+    }catch(e){alert('Server error');db.disabled=false;db.innerHTML=IC.cards+' DEAL';return;}
   }
 
   const cards=smartCards();
@@ -1010,7 +1033,7 @@ function doP1Turn(){
   startT(1,20,()=>{
     if(DONE)return;
     stopT(1);setThink(1,false);
-    if(!G.f1){G.f1=true;setBdg(1,'Time Out ❌','bf');}
+    if(!G.f1){G.f1=true;setBdg(1,'Time Out '+IC.x,'bf');}
     // If both AI folded → user wins
     if(G.f1&&G.f2){endGame('win',G.pot);return;}
     doP2Turn();// pass turn to P2
@@ -1033,7 +1056,7 @@ function doP1Turn(){
     }
 
     if(act==='fold'){
-      G.f1=true;setBdg(1,'Folded ❌','bf');
+      G.f1=true;setBdg(1,'Folded '+IC.x,'bf');
       const sb1=document.getElementById('sb1');if(sb1)sb1.style.display='none';
       if(Math.random()>.5)chatBub('s1',CHAT[rnd(0,CHAT.length-1)]);
       if(G.f1&&G.f2){endGame('win',G.pot);return;}
@@ -1042,7 +1065,7 @@ function doP1Turn(){
       const raiseCost=G.bet*2;
       G.pot+=raiseCost;updPot(true);
       coinFly(document.getElementById('n1'),3);
-      setBdg(1,'Raised ⬆ 🔥','br2');
+      setBdg(1,'Raised '+IC.up+' 🔥','br2');
       // Update P1 bet label to show raised amount
       const sb1=document.getElementById('sb1');if(sb1){sb1.textContent='₹'+raiseCost;sb1.style.display='block';}
       if(G.aiWin)chatBub('s1','All in! 🔥');
@@ -1072,7 +1095,7 @@ function doP2Turn(){
   startT(2,20,()=>{
     if(DONE)return;
     stopT(2);setThink(2,false);
-    if(!G.f2){G.f2=true;setBdg(2,'Time Out ❌','bf');}
+    if(!G.f2){G.f2=true;setBdg(2,'Time Out '+IC.x,'bf');}
     if(G.f1&&G.f2){endGame('win',G.pot);return;}
     doYourTurn();
   });
@@ -1086,7 +1109,7 @@ function doP2Turn(){
     const act=r2>=2?'call':Math.random()>.45?'call':'fold';
 
     if(act==='fold'){
-      G.f2=true;setBdg(2,'Folded ❌','bf');
+      G.f2=true;setBdg(2,'Folded '+IC.x,'bf');
       const sb2=document.getElementById('sb2');if(sb2)sb2.style.display='none';
       if(Math.random()>.5)chatBub('s2',CHAT[rnd(0,CHAT.length-1)]);
       if(G.f1&&G.f2){endGame('win',G.pot);return;}
@@ -1122,7 +1145,7 @@ function pa(action){
   stopAllT();// stop all timers immediately
 
   if(action==='fold'){
-    setBdg(0,'Folded ❌','bf');
+    setBdg(0,'Folded '+IC.x,'bf');
     endGame('loss',0);
     return;
   }
@@ -1157,7 +1180,7 @@ function pa(action){
     }
     G.pot+=cost;
     if(!isPr){G.chips-=cost;if(G.chips<0)G.chips=0;updChips();}
-    G.bet*=2;updPot(true);setBdg(0,'Raised ⬆','br2');coinFly(tc,4);
+    G.bet*=2;updPot(true);setBdg(0,'Raised '+IC.up,'br2');coinFly(tc,4);
     const sb0r=document.getElementById('sb0');if(sb0r){sb0r.textContent='₹'+G.bet;sb0r.style.display='block';}
   }
 
@@ -1204,11 +1227,11 @@ function showdown(){
     if(pR>=a1R&&pR>=a2R){
       if(!G.f1)setBdg(1,'Lost 😔','bf');
       if(!G.f2)setBdg(2,'Lost 😔','bf');
-      setBdg(0,'Won! 🎉','bw');endGame('win',G.pot);
+      setBdg(0,'Won! '+IC.trophy,'bw');endGame('win',G.pot);
     }else{
       setBdg(0,'Lost 😞','bf');
-      if(!G.f1&&a1R>=a2R){setBdg(1,'Won! 🎉','bw');chatBub('s1',CHAT[rnd(0,CHAT.length-1)]);}
-      else if(!G.f2){setBdg(2,'Won! 🎉','bw');chatBub('s2',CHAT[rnd(0,CHAT.length-1)]);}
+      if(!G.f1&&a1R>=a2R){setBdg(1,'Won! '+IC.trophy,'bw');chatBub('s1',CHAT[rnd(0,CHAT.length-1)]);}
+      else if(!G.f2){setBdg(2,'Won! '+IC.trophy,'bw');chatBub('s2',CHAT[rnd(0,CHAT.length-1)]);}
       endGame('loss',0);
     }
   },1700);
@@ -1245,11 +1268,11 @@ async function endGame(result,won){
     const pR=rank(G.pC),a1R=G.f1?-1:rank(G.a1),a2R=G.f2?-1:rank(G.a2);
     const wi=pR>=a1R&&pR>=a2R?0:a1R>=a2R?1:2;
 
-    document.getElementById('ric').textContent=result==='win'?'🎉':'😞';
+    document.getElementById('ric').innerHTML=result==='win'?IC.trophy:'😞';
     document.getElementById('rtt').textContent=result==='win'?'You Won!':'You Lost!';
     document.getElementById('rtt').className='rt '+(result==='win'?'w':'l');
     document.getElementById('ra').innerHTML=result==='win'
-      ?`<span style="color:#66bb6a;font-weight:900;font-size:19px">+₹${G.pot.toLocaleString()} chips! 🏆</span>`
+      ?`<span style="color:#66bb6a;font-weight:900;font-size:19px">+₹${G.pot.toLocaleString()} chips! ${IC.trophy}</span>`
       :`<span style="color:#ef9a9a">Opponent had <strong style="color:#ff8f8f">${G.f1?'—':RN[a1R]}</strong>!</span>`;
 
     const ahs=document.getElementById('ahs');ahs.innerHTML='';
@@ -1259,7 +1282,7 @@ async function endGame(result,won){
     ].forEach(h=>{
       const col=document.createElement('div');col.className='hcol';
       const lbl=document.createElement('div');lbl.className='hlbl'+(h.w?' w':'');
-      lbl.innerHTML=`<strong>${h.w?'🏆 ':''} ${h.nm}</strong>`;col.appendChild(lbl);
+      lbl.innerHTML=`<strong>${h.w?IC.trophy+' ':''} ${h.nm}</strong>`;col.appendChild(lbl);
       const row=document.createElement('div');row.className='hcr';
       if(h.fd){const fd=document.createElement('div');fd.style.cssText='font-size:10px;color:#333;padding:6px;';fd.textContent='Folded';row.appendChild(fd);}
       else{h.cards.forEach(c=>{const el=cSm(c);if(h.w)el.classList.add('wg');row.appendChild(el);});}
@@ -1286,7 +1309,7 @@ function again(){
   [0,1,2].forEach(i=>setBdg(i,'','bi'));
   ['sb0','sb1','sb2'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
   ['bcall','braise','bfold','bshow'].forEach(id=>{const e=document.getElementById(id);if(e){e.style.display='none';e.disabled=false;}});
-  const db=document.getElementById('bdeal');db.style.display='inline-flex';db.disabled=false;db.textContent='🃏 DEAL';
+  const db=document.getElementById('bdeal');db.style.display='inline-flex';db.disabled=false;db.innerHTML=IC.cards+' DEAL';
   document.getElementById('betr').style.display='flex';
   const se=document.getElementById('seebtn');se.classList.remove('on');se.style.display='';
   revealed=false;DONE=false;G.f1=false;G.f2=false;
@@ -1308,7 +1331,7 @@ function showLC(type){
     if(sec<=0){
       stopLcT();PAUSED=false;
       document.getElementById('lcov').classList.remove('on');
-      if(type==='mid'&&!DONE){setBdg(0,'Folded ❌','bf');endGame('loss',0);}
+      if(type==='mid'&&!DONE){setBdg(0,'Folded '+IC.x,'bf');endGame('loss',0);}
       else showTS();
     }
   },1000);
@@ -1317,7 +1340,7 @@ function stopLcT(){if(lcTmr){clearInterval(lcTmr);lcTmr=null;}}
 function lcFold(){
   stopLcT();PAUSED=false;
   document.getElementById('lcov').classList.remove('on');
-  if(!DONE){setBdg(0,'Folded ❌','bf');endGame('loss',0);}else showTS();
+  if(!DONE){setBdg(0,'Folded '+IC.x,'bf');endGame('loss',0);}else showTS();
 }
 
 // ── LOAD CHIPS ──
