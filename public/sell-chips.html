@@ -59,7 +59,8 @@ body{font-family:'Inter',sans-serif;background:#0a0006;min-height:100vh;
 <div class="wrap">
   <div class="bal-card">
     <div class="bal-label">Available Balance</div>
-    <div class="bal-amt" id="balAmt">₹0</div>
+    <div class="bal-amt" id="balAmt">0 chips</div>
+    <div id="balRupees" style="color:rgba(255,255,255,.5);font-size:13px;font-weight:700;margin-top:4px;">≈ ₹0</div>
   </div>
 
   <div class="soon-badge">
@@ -97,7 +98,8 @@ body{font-family:'Inter',sans-serif;background:#0a0006;min-height:100vh;
 // PUT YOUR WHATSAPP NUMBER HERE — with country code, no
 // spaces, no +, no dashes. Example for India: 919876543210
 // ══════════════════════════════════════════════════════
-const WHATSAPP_NUMBER = "91XXXXXXXXXX"; // ← REPLACE THIS WITH YOUR REAL NUMBER
+const WHATSAPP_NUMBER = "917899735805"; // full number with country code, no + or spaces
+const CHIP_RATE = 1; // chips per ₹1 — keep in sync with config/economy.js
 const API_URL = "/api"; // change if your backend runs elsewhere
 
 const TK = localStorage.getItem('token');
@@ -118,7 +120,8 @@ async function loadBalance(){
     userInfo.name = data.name || 'Unknown';
     userInfo.phone = data.phone || 'Not available';
     userInfo.id = data._id || data.id || 'Unknown';
-    document.getElementById('balAmt').textContent = '₹' + currentBalance.toLocaleString();
+    document.getElementById('balAmt').textContent = currentBalance.toLocaleString() + ' chips';
+    document.getElementById('balRupees').textContent = '≈ ₹' + Math.floor(currentBalance / CHIP_RATE).toLocaleString();
   }catch(e){}
 }
 loadBalance();
@@ -139,7 +142,7 @@ function startWithdraw(){
     return;
   }
   if(chips > currentBalance){
-    alert(`You only have ₹${currentBalance.toLocaleString()} chips.\nYou cannot withdraw more than your available balance.`);
+    alert(`You only have ${currentBalance.toLocaleString()} chips.\nYou cannot withdraw more than your available balance.`);
     return;
   }
 
@@ -154,7 +157,7 @@ function startWithdraw(){
   const msg =
 `Hi! I want to withdraw chips from JeetPatti.
 
-Chips: ${chips.toLocaleString()} (₹${chips.toLocaleString()})
+Chips: ${chips.toLocaleString()} (₹${Math.floor(chips/CHIP_RATE).toLocaleString()})
 My UPI ID: ${upi}
 
 ── My Account ──
@@ -162,7 +165,7 @@ Name: ${userInfo.name}
 Phone: ${userInfo.phone}
 User ID: ${userInfo.id}`;
 
-  const link = `https://wa.me/${7899735805}?text=${encodeURIComponent(msg)}`;
+  const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
   window.open(link, '_blank');
 
   btn.innerHTML = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg> Sent — check WhatsApp';

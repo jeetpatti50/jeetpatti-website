@@ -62,7 +62,7 @@ h2{color:#fff;font-size:16px;margin-bottom:14px;font-weight:800;}
   </div>
 
   <h2>Choose a package</h2>
-  <div class="rate">1 Rupee = 1 Chip</div>
+  <div class="rate">₹1 = 1 Chip</div>
 
   <div class="grid" id="pkgGrid">
     <div class="pkg on" data-amt="1000"><div class="amt">₹1,000</div><div class="chips">1,000 chips</div></div>
@@ -95,7 +95,8 @@ h2{color:#fff;font-size:16px;margin-bottom:14px;font-weight:800;}
 // PUT YOUR WHATSAPP NUMBER HERE — with country code, no
 // spaces, no +, no dashes. Example for India: 919876543210
 // ══════════════════════════════════════════════════════
-const WHATSAPP_NUMBER = "91XXXXXXXXXX"; // ← REPLACE THIS WITH YOUR REAL NUMBER
+const WHATSAPP_NUMBER = "917899735805"; // full number with country code, no + or spaces
+const CHIP_RATE = 1; // chips per ₹1 — keep in sync with config/economy.js
 const API_URL = "/api"; // change if your backend runs elsewhere
 
 const TK = localStorage.getItem('token');
@@ -130,7 +131,7 @@ function updateWaLink(){
   const msg =
 `Hi! I want to buy chips on JeetPatti.
 
-Package: ₹${selectedAmt.toLocaleString()} (${selectedAmt.toLocaleString()} chips)
+Package: ₹${selectedAmt.toLocaleString()} (${(selectedAmt*CHIP_RATE).toLocaleString()} chips)
 
 ── My Account ──
 Name: ${userInfo.name}
@@ -138,7 +139,7 @@ Phone: ${userInfo.phone}
 User ID: ${userInfo.id}
 
 Please share the payment UPI ID / QR code.`;
-  const link = `https://wa.me/${7899735805}?text=${encodeURIComponent(msg)}`;
+  const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
   document.getElementById('waBtn').href = link;
 }
 updateWaLink();

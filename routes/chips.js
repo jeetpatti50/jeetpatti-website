@@ -4,6 +4,7 @@ const Razorpay    = require('razorpay');
 const User        = require('../models/User');
 const Transaction = require('../models/Transaction');
 const auth        = require('../middleware/auth');
+const { CHIP_RATE, MIN_BUY_RUPEES, MIN_SELL_CHIPS } = require('../config/economy');
 
 const razorpay = new Razorpay({
   key_id:     process.env.RAZORPAY_KEY_ID,
@@ -13,9 +14,9 @@ const razorpay = new Razorpay({
 router.post('/buy', auth, async (req, res) => {
   try {
     const { amount } = req.body;
-    if (!amount || amount < 10)
-      return res.status(400).json({ error: 'Minimum amount is Rs 10' });
-    const chips = amount * 10;
+    if (!amount || amount < MIN_BUY_RUPEES)
+      return res.status(400).json({ error: 'Minimum amount is Rs ' + MIN_BUY_RUPEES });
+    const chips = amount * CHIP_RATE;
     const order = await razorpay.orders.create({
       amount: amount * 100,
       currency: 'INR',
@@ -55,15 +56,15 @@ router.post('/confirm', auth, async (req, res) => {
 router.post('/sell', auth, async (req, res) => {
   try {
     const { chips, bankAccount, ifscCode, accountName } = req.body;
-    if (!chips || chips < 100)
-      return res.status(400).json({ error: 'Minimum 100 chips required' });
+    if (!chips || chips < MIN_SELL_CHIPS)
+      return res.status(400).json({ error: 'Minimum ' + MIN_SELL_CHIPS + ' chips required' });
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ error: 'User not found' });
     if (user.chips < chips)
       return res.status(400).json({ error: 'Not enough chips' });
     if (!bankAccount || !ifscCode || !accountName)
       return res.status(400).json({ error: 'Bank details required' });
-    const amount = Math.floor(chips / 10);
+    const amount = Math.floor(chips / CHIP_RATE);
     await User.findByIdAndUpdate(req.user.id, {
       $inc: { chips: -chips, totalSold: chips },
       $set: { bankAccount, ifscCode, accountName }

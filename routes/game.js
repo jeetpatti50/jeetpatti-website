@@ -4,18 +4,22 @@ const User        = require('../models/User');
 const GameHistory = require('../models/GameHistory');
 const Transaction = require('../models/Transaction');
 const auth        = require('../middleware/auth');
+const { SEATS }   = require('../config/economy');
 
 router.post('/start', auth, async (req, res) => {
   try {
-    const { bet } = req.body;
-    if (!bet || bet < 1)
+    const bet = Number(req.body.bet);
+    if (!Number.isFinite(bet) || bet < 1)
       return res.status(400).json({ error: 'Invalid bet amount' });
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ error: 'User not found' });
-    const totalCost = bet * 3;
+    const totalCost = bet * SEATS;
     if (user.chips < totalCost)
       return res.status(400).json({ error: 'Not enough chips. Buy more chips to play.' });
-    await User.findByIdAndUpdate(req.user.id, { $inc: { chips: -totalCost } });
+    // Deduct the stake and record the active bet so /end can't be spoofed.
+    await User.findByIdAndUpdate(req.user.id, {
+      $inc: { chips: -totalCost }, $set: { activeBet: bet }
+    });
     res.json({ success: true });
   } catch (err) {
     console.error(err);
@@ -25,29 +29,40 @@ router.post('/start', auth, async (req, res) => {
 
 router.post('/end', auth, async (req, res) => {
   try {
-    const { result, chipsWon, chipsLost, pot, playerCards, aiCards } = req.body;
-    let newChips = 0;
+    const { result, playerCards, aiCards } = req.body;
+    if (result !== 'win' && result !== 'loss')
+      return res.status(400).json({ error: 'Invalid result' });
+
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    // Payout is computed from the server-recorded bet, NOT from client input.
+    const bet = user.activeBet || 0;
+    if (bet <= 0)
+      return res.status(400).json({ error: 'No active game' });
+    const pot = bet * SEATS;
+
+    let newChips = user.chips;
     if (result === 'win') {
-      const user = await User.findByIdAndUpdate(
-        req.user.id, { $inc: { chips: pot } }, { new: true }
+      const updated = await User.findByIdAndUpdate(
+        req.user.id, { $inc: { chips: pot }, $set: { activeBet: 0 } }, { new: true }
       );
-      newChips = user.chips;
+      newChips = updated.chips;
       await Transaction.create({
         userId: req.user.id, type: 'game_win', chips: pot, amount: 0, status: 'success'
       });
     } else {
-      const user = await User.findById(req.user.id);
-      newChips = user.chips;
+      await User.findByIdAndUpdate(req.user.id, { $set: { activeBet: 0 } });
       await Transaction.create({
-        userId: req.user.id, type: 'game_loss', chips: -(chipsLost || 0), amount: 0, status: 'success'
+        userId: req.user.id, type: 'game_loss', chips: -pot, amount: 0, status: 'success'
       });
     }
     await GameHistory.create({
       userId: req.user.id, result,
-      chipsWon:    result === 'win' ? (pot || 0) : 0,
-      chipsLost:   result === 'loss' ? (chipsLost || 0) : 0,
-      betAmount:   chipsLost || 0,
-      pot:         pot || 0,
+      chipsWon:    result === 'win' ? pot : 0,
+      chipsLost:   result === 'loss' ? pot : 0,
+      betAmount:   bet,
+      pot:         pot,
       playerCards: playerCards || [],
       aiCards:     aiCards || []
     });
