@@ -4,6 +4,7 @@ Allow: /index.html
 Allow: /buy-chips.html
 Allow: /register.html
 Allow: /login.html
+
 Disallow: /admin.html
 Disallow: /dashboard.html
 Disallow: /game.html
@@ -12,4 +13,4 @@ Disallow: /profile.html
 Disallow: /sell-chips.html
 Disallow: /api/
 
-Sitemap: https://jeetpatti.com/sitemap.xml
+Sitemap: https://jeetpatti.in/sitemap.xml

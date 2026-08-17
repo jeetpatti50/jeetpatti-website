@@ -12,7 +12,7 @@
   <meta name="author" content="JeetPatti"/>
   <meta name="robots" content="index, follow"/>
   <meta name="theme-color" content="#0a0006"/>
-  <link rel="canonical" href="https://jeetpatti.com/"/>
+  <link rel="canonical" href="https://jeetpatti.in/"/>
 
   <!-- Favicon / Icons -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
@@ -25,25 +25,53 @@
   <meta property="og:site_name" content="JeetPatti"/>
   <meta property="og:title" content="JeetPatti – Play Teen Patti Online"/>
   <meta property="og:description" content="India's trusted Teen Patti (3 Patti) game. Buy chips, join live tables, and win big — fast, secure and free to join."/>
-  <meta property="og:url" content="https://jeetpatti.com/"/>
-  <meta property="og:image" content="https://jeetpatti.com/icon-512.png"/>
+  <meta property="og:url" content="https://jeetpatti.in/"/>
+  <meta property="og:image" content="https://jeetpatti.in/icon-512.png"/>
   <meta property="og:locale" content="en_IN"/>
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="JeetPatti – Play Teen Patti Online"/>
   <meta name="twitter:description" content="India's trusted Teen Patti (3 Patti) game. Buy chips, join live tables, and win big."/>
-  <meta name="twitter:image" content="https://jeetpatti.com/icon-512.png"/>
+  <meta name="twitter:image" content="https://jeetpatti.in/icon-512.png"/>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "JeetPatti",
-    "url": "https://jeetpatti.com/",
-    "description": "India's trusted Teen Patti (3 Patti) online card game.",
-    "inLanguage": "en-IN"
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://jeetpatti.in/#organization",
+        "name": "JeetPatti",
+        "url": "https://jeetpatti.in/",
+        "logo": "https://jeetpatti.in/icon-512.png",
+        "description": "India's trusted Teen Patti (3 Patti) online card game."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jeetpatti.in/#website",
+        "name": "JeetPatti",
+        "url": "https://jeetpatti.in/",
+        "description": "India's trusted Teen Patti (3 Patti) online card game.",
+        "inLanguage": "en-IN",
+        "publisher": { "@id": "https://jeetpatti.in/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://jeetpatti.in/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Game",
+        "name": "Teen Patti (3 Patti) on JeetPatti",
+        "url": "https://jeetpatti.in/",
+        "genre": "Card Game",
+        "gamePlatform": "Web Browser",
+        "inLanguage": "en-IN",
+        "publisher": { "@id": "https://jeetpatti.in/#organization" }
+      }
+    ]
   }
   </script>
 
