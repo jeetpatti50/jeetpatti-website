@@ -36,8 +36,16 @@ async function sendOtp(phone) {
     throw err;
   }
 
-  const url = `https://2factor.in/API/V1/${key}/SMS/${phone}/AUTOGEN`;
+  // AUTOGEN with no template delivers via VOICE CALL. To send an SMS, pass a
+  // DLT-approved OTP template name from your 2Factor dashboard (TWOFACTOR_TEMPLATE).
+  const template = process.env.TWOFACTOR_TEMPLATE;
+  const url = template
+    ? `https://2factor.in/API/V1/${key}/SMS/${phone}/AUTOGEN/${encodeURIComponent(template)}`
+    : `https://2factor.in/API/V1/${key}/SMS/${phone}/AUTOGEN`;
+  console.log('[OTP] template =', JSON.stringify(template));
+  console.log('[OTP] request URL =', url.replace(key, '<KEY>'));
   const data = await apiGet(url);
+  console.log('[OTP] 2Factor response =', JSON.stringify(data));
   if (data.Status !== 'Success') {
     throw new Error(data.Details || 'Failed to send OTP');
   }
