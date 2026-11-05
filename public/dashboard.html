@@ -1,198 +1,191 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="robots" content="noindex, nofollow"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
   <link rel="apple-touch-icon" href="icon-192.png"/>
-  <meta name="theme-color" content="#0a0006"/>
+  <link rel="manifest" href="manifest.json"/>
+  <meta name="theme-color" content="#0a0710"/>
   <title>Dashboard – JeetPatti</title>
   <link rel="stylesheet" href="css/style.css"/>
   <style>
-    .dash-layout{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 60px);}
-    .sidebar{background:rgba(10,31,10,0.85);border-right:1px solid rgba(240,192,64,0.1);padding:20px 0;display:flex;flex-direction:column;}
-    .sidebar-user{padding:0 16px 20px;border-bottom:1px solid rgba(240,192,64,0.1);margin-bottom:8px;}
-    .user-av{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--green-bright),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#1a1000;margin-bottom:8px;}
-    .user-nm{font-size:15px;font-weight:600;color:var(--white);}
-    .user-em{font-size:11px;color:var(--gray);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-    .user-chip-pill{background:rgba(240,192,64,0.1);border:1px solid rgba(240,192,64,0.2);border-radius:var(--radius);padding:8px 10px;margin-top:10px;display:flex;align-items:center;gap:8px;}
-    .ucp-num{font-size:18px;font-weight:700;color:var(--gold);font-family:'Cinzel',serif;}
-    .ucp-lbl{font-size:10px;color:var(--gray);}
-    /* SIDEBAR NAV — no Play Teen Patti link */
-    .snav a{display:flex;align-items:center;gap:10px;padding:11px 16px;color:rgba(255,255,255,0.65);text-decoration:none;font-size:13px;font-weight:500;transition:all .2s;border-left:3px solid transparent;}
-    .snav a:hover,.snav a.active{color:var(--gold);background:rgba(240,192,64,0.07);border-left-color:var(--gold-dark);}
-    .snav a .ni{font-size:16px;width:20px;text-align:center;}
-    .main{padding:24px;overflow-y:auto;padding-bottom:80px;}
-    /* Welcome */
-    .welcome{background:linear-gradient(135deg,var(--green-table),var(--green-mid));border:1px solid rgba(240,192,64,0.2);border-radius:var(--radius-lg);padding:20px 22px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-    .welcome h2{font-size:18px;color:var(--gold);margin-bottom:3px;}
-    .welcome p{color:var(--gray);font-size:13px;}
-    /* BIG PLAY BUTTON */
-    .play-card{background:linear-gradient(135deg,#0d3b0d,#1a5c1a);border:2px solid rgba(240,192,64,0.4);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;text-decoration:none;display:block;transition:all .2s;margin-bottom:20px;box-shadow:0 4px 20px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.05);position:relative;overflow:hidden;}
-    .play-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 50%,rgba(240,192,64,0.08),transparent);pointer-events:none;}
-    .play-card:hover{border-color:var(--gold);box-shadow:0 6px 30px rgba(240,192,64,0.25);transform:translateY(-2px);}
-    .play-card .felt-icon{font-size:48px;margin-bottom:10px;display:block;filter:drop-shadow(0 0 10px rgba(240,192,64,0.3));}
-    .play-card h3{font-family:'Cinzel',serif;font-size:22px;color:var(--gold);margin-bottom:6px;letter-spacing:1px;}
-    .play-card p{font-size:13px;color:rgba(255,255,255,0.6);}
-    .online-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(76,175,80,0.15);border:1px solid rgba(76,175,80,0.3);border-radius:20px;padding:4px 12px;font-size:11px;color:#81c784;margin-top:10px;}
-    .online-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:#4caf50;animation:gp 1.5s infinite;}
-    @keyframes gp{0%,100%{opacity:1}50%{opacity:.3}}
-    /* Stats */
-    .stats-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
-    .stat-card{background:var(--green-mid);border:1px solid rgba(240,192,64,0.12);border-radius:var(--radius);padding:16px 18px;}
-    .stat-card .stat-label{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
-    .stat-card .stat-value{font-size:24px;font-weight:700;color:var(--gold);font-family:'Cinzel',serif;}
-    .stat-card .stat-sub{font-size:11px;color:var(--green-glow);margin-top:3px;}
-    /* Quick actions */
-    .quick-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
-    .quick-card{background:var(--green-mid);border:1px solid rgba(240,192,64,0.12);border-radius:var(--radius-lg);padding:18px;text-align:center;cursor:pointer;text-decoration:none;display:block;transition:all .2s;}
-    .quick-card:hover{border-color:var(--gold-dark);box-shadow:var(--shadow-gold);}
-    .quick-card .qi{font-size:30px;margin-bottom:8px;}
-    .quick-card h3{color:var(--gold);font-size:14px;margin-bottom:4px;}
-    .quick-card p{color:var(--gray);font-size:12px;}
-    /* History */
-    .history-box{background:var(--green-mid);border:1px solid rgba(240,192,64,0.12);border-radius:var(--radius-lg);padding:18px;}
-    .history-box h3{font-family:'Cinzel',serif;color:var(--gold);font-size:14px;margin-bottom:14px;}
-    @media(max-width:900px){
-      .dash-layout{grid-template-columns:1fr;}
-      .sidebar{display:none;}
-      .main{padding:16px;padding-bottom:80px;}
+    .hello { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .hello h1 { font-size: clamp(22px, 3.2vw, 30px); font-weight: 900; }
+    .hello p { color: var(--muted); font-size: 14.5px; margin-top: 4px; }
+    .top-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 16px; margin-bottom: 16px; }
+
+    /* Wallet card */
+    .wallet {
+      position: relative; overflow: hidden; border-radius: var(--radius-lg); padding: 24px;
+      background: radial-gradient(ellipse at 100% 0%, rgba(255,224,138,.35), transparent 55%), linear-gradient(135deg, #3a2405 0%, #1f1405 60%, #160d03 100%);
+      border: 1px solid var(--line-gold); box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between; min-height: 220px;
+    }
+    .wallet .w-lbl { display: flex; align-items: center; gap: 8px; color: var(--gold-2); font-size: 13.5px; font-weight: 600; opacity: .9; }
+    .wallet .w-amt { font-size: clamp(38px, 5vw, 50px); font-weight: 800; letter-spacing: -1px; margin: 8px 0 2px; display: flex; align-items: baseline; gap: 10px; }
+    .wallet .w-amt small { font-size: 15px; font-weight: 600; color: var(--gold-2); letter-spacing: 0; }
+    .wallet .w-sub { color: rgba(255,224,138,.65); font-size: 13.5px; }
+    .wallet .w-btns { display: flex; gap: 10px; margin-top: 20px; }
+    .wallet .w-btns .btn { flex: 1; }
+    .wallet .cchip { position: absolute; right: -18px; top: -18px; --s: 110px; opacity: .55; }
+
+    /* Play card */
+    .play {
+      position: relative; overflow: hidden; border-radius: var(--radius-lg); padding: 24px; text-decoration: none; color: var(--text);
+      background: radial-gradient(ellipse at 70% 60%, #1b8c4c 0%, #0d5a31 45%, #062a17 100%);
+      border: 1px solid rgba(34,197,94,.35); box-shadow: var(--shadow), inset 0 0 80px rgba(0,0,0,.45);
+      display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; transition: transform .25s, box-shadow .25s;
+    }
+    .play:hover { transform: translateY(-3px); box-shadow: 0 20px 60px rgba(22,163,74,.25), inset 0 0 80px rgba(0,0,0,.45); }
+    .play::before { content: ''; position: absolute; inset: 10px; border-radius: 16px; border: 1px dashed rgba(255,255,255,.12); pointer-events: none; }
+    .play .p-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.12); padding: 6px 12px; border-radius: 30px; align-self: flex-start; }
+    .play h2 { font-size: clamp(26px, 3.4vw, 36px); font-weight: 900; line-height: 1.05; margin: 14px 0 6px; text-shadow: 0 4px 20px rgba(0,0,0,.5); }
+    .play p { color: rgba(255,255,255,.7); font-size: 14px; max-width: 240px; }
+    .play .p-cta { margin-top: 18px; align-self: flex-start; }
+    .play .p-fan { position: absolute; right: 26px; top: 50%; transform: translateY(-50%); display: flex; }
+    .play .p-fan .pcard { --w: 74px; margin-left: -28px; box-shadow: -6px 8px 20px rgba(0,0,0,.5); transition: transform .35s; }
+    .play .p-fan .pcard:nth-child(1) { transform: rotate(-14deg) translateY(8px); margin-left: 0; }
+    .play .p-fan .pcard:nth-child(3) { transform: rotate(14deg) translateY(8px); }
+    .play:hover .p-fan .pcard:nth-child(1) { transform: rotate(-22deg) translate(-10px, 10px); }
+    .play:hover .p-fan .pcard:nth-child(3) { transform: rotate(22deg) translate(10px, 10px); }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    .quick { display: none; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+    .quick a { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 14px 6px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: var(--text); font-size: 12.5px; font-weight: 600; }
+    .quick a .q-ic { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; background: rgba(245,197,66,.1); color: var(--gold); }
+    .quick a:nth-child(2) .q-ic { background: rgba(34,197,94,.12); color: var(--emerald-2); }
+    .quick a:nth-child(3) .q-ic { background: rgba(139,92,246,.14); color: #c4b5fd; }
+    .quick a:nth-child(4) .q-ic { background: rgba(225,29,72,.12); color: var(--ruby-2); }
+    .quick a .q-ic svg { width: 20px; height: 20px; }
+
+    .games { display: flex; flex-direction: column; gap: 8px; }
+    .g-row { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.03); border: 1px solid var(--line); }
+    .g-res { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; flex-shrink: 0; }
+    .g-res.win { background: rgba(34,197,94,.14); color: var(--emerald-2); }
+    .g-res.loss { background: rgba(225,29,72,.14); color: var(--ruby-2); }
+    .g-res svg { width: 20px; height: 20px; }
+    .g-info { flex: 1; min-width: 0; }
+    .g-info b { font-size: 14.5px; font-weight: 700; }
+    .g-info span { display: block; font-size: 12.5px; color: var(--dim); margin-top: 2px; }
+    .g-amt { font-weight: 800; font-size: 15.5px; white-space: nowrap; }
+    .g-amt.win { color: var(--emerald-2); } .g-amt.loss { color: var(--ruby-2); }
+
+    @media (max-width: 960px) {
+      .top-grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .quick { display: grid; }
+    }
+    @media (max-width: 520px) {
+      .play .p-fan { right: 14px; }
+      .play .p-fan .pcard { --w: 56px; margin-left: -22px; }
+      .g-row .mini-cards { display: none; }
     }
   </style>
 </head>
-<body>
-<nav class="navbar">
-  <a href="index.html" class="brand">♣ Jeet<span>Patti</span></a>
-  <div class="nav-links">
-    <a href="buy-chips.html">Buy Chips</a>
-    <a href="sell-chips.html">Sell Chips</a>
-  </div>
-  <div style="display:flex;gap:10px;align-items:center;">
-    <span class="nav-chips"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3h4"/></svg> <span id="nav-chips">0</span></span>
-    <button class="btn btn-gray btn-sm" onclick="logout()">Logout</button>
-    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-<div class="mobile-menu" id="mobile-menu">
-  <a href="dashboard.html"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg> Dashboard</a>
-  <a href="buy-chips.html"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Buy Chips</a>
-  <a href="sell-chips.html"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/></svg> Sell Chips</a>
-  <a href="history.html"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 4v4h4"/></svg> Game History</a>
-  <a href="profile.html"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg> My Profile</a>
-  <div class="divider-line"></div>
-  <a href="#" onclick="logout()"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg> Logout</a>
-</div>
-<nav class="bottom-nav">
-  <a href="dashboard.html" class="active"><span class="bn-icon"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span>Home</a>
-  <a href="game.html"><span class="bn-icon"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C9 7 5 8.5 5 12a3 3 0 0 0 5 2c-.4 2-1 3-2 4h8c-1-1-1.6-2-2-4a3 3 0 0 0 5-2c0-3.5-4-5-7-9z"/></svg></span>Play</a>
-  <a href="buy-chips.html"><span class="bn-icon"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>Buy</a>
-  <a href="sell-chips.html"><span class="bn-icon"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/></svg></span>Sell</a>
-  <a href="profile.html"><span class="bn-icon"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span>Profile</a>
-</nav>
-
-<div class="dash-layout">
-  <aside class="sidebar">
-    <div class="sidebar-user">
-      <div class="user-av" id="av-letter">U</div>
-      <div class="user-nm" id="sb-name">Loading...</div>
-      <div class="user-em" id="sb-email"></div>
-      <div class="user-chip-pill">
-        <span><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3h4"/></svg></span>
-        <div><div class="ucp-num" id="sb-chips">0</div><div class="ucp-lbl">Chips (₹1 = 1 Chip)</div></div>
-      </div>
-    </div>
-    <!-- NO Play Teen Patti link here -->
-    <nav class="snav">
-      <a href="dashboard.html" class="active"><span class="ni"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span> Dashboard</a>
-      <a href="buy-chips.html"><span class="ni"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span> Buy Chips</a>
-      <a href="sell-chips.html"><span class="ni"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/></svg></span> Sell Chips</a>
-      <a href="history.html"><span class="ni"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 4v4h4"/></svg></span> Game History</a>
-      <a href="profile.html"><span class="ni"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span> My Profile</a>
-      <a href="#" onclick="logout()"><span class="ni"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg></span> Logout</a>
-    </nav>
-  </aside>
-
+<body data-page="dashboard">
+<header id="topbar"></header>
+<div class="app">
+  <aside id="sidebar"></aside>
   <main class="main">
-    <div class="welcome">
+    <div class="hello">
       <div>
-        <h2>Welcome, <span id="welcome-name">Player</span>! 👋</h2>
-        <p>Ready to play? / खेलने के लिए तैयार हैं?</p>
+        <h1>Namaste, <span class="js-first gold-text">Player</span> 👋</h1>
+        <p>Ready to play? <span class="hi">खेलने के लिए तैयार हैं?</span></p>
       </div>
     </div>
 
-    <!-- BIG PLAY BUTTON — only one, in center -->
-    <a href="game.html" class="play-card">
-      <span class="felt-icon"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C9 7 5 8.5 5 12a3 3 0 0 0 5 2c-.4 2-1 3-2 4h8c-1-1-1.6-2-2-4a3 3 0 0 0 5-2c0-3.5-4-5-7-9z"/></svg></span>
-      <h3>PLAY TEEN PATTI</h3>
-      <p>Tap to choose your table and start playing</p>
-      <div class="online-badge" id="online-badge">Players online now</div>
-    </a>
-
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-label">Chip Balance</div>
-        <div class="stat-value" id="stat-chips">0</div>
-        <div class="stat-sub">₹1 = 1 Chip</div>
+    <div class="top-grid">
+      <div class="wallet">
+        <div class="cchip gold"></div>
+        <div>
+          <div class="w-lbl"><i data-i="wallet"></i>Chip Balance</div>
+          <div class="w-amt"><span id="stat-chips">0</span><small>chips</small></div>
+          <div class="w-sub">≈ ₹<span id="stat-rupees">0</span> · ₹1 = 1 Chip</div>
+        </div>
+        <div class="w-btns">
+          <a href="buy-chips.html" class="btn btn-gold"><i data-i="plus"></i>Add Chips</a>
+          <a href="sell-chips.html" class="btn btn-ghost"><i data-i="bank"></i>Withdraw</a>
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-label">Total Chips Won</div>
-        <div class="stat-value" id="stat-won" style="color:var(--green-glow)">0</div>
-        <div class="stat-sub">Lifetime winnings</div>
-      </div>
-    </div>
 
-    <div class="quick-row">
-      <a href="buy-chips.html" class="quick-card">
-        <div class="qi"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
-        <h3>Buy Chips</h3>
-        <p>₹1 = 1 Chip • Instant</p>
-      </a>
-      <a href="sell-chips.html" class="quick-card">
-        <div class="qi"><svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/></svg></div>
-        <h3>Sell Chips</h3>
-        <p>Convert to real money</p>
+      <a href="game.html" class="play">
+        <div class="p-fan" aria-hidden="true">
+          <div class="pcard"><div class="pc-c tl">A<i>♠</i></div><div class="pc-s">♠</div><div class="pc-c br">A<i>♠</i></div></div>
+          <div class="pcard red"><div class="pc-c tl">A<i>♥</i></div><div class="pc-s">♥</div><div class="pc-c br">A<i>♥</i></div></div>
+          <div class="pcard red"><div class="pc-c tl">A<i>♦</i></div><div class="pc-s">♦</div><div class="pc-c br">A<i>♦</i></div></div>
+        </div>
+        <span class="p-tag"><span class="live-dot" id="online-badge">Players online now</span></span>
+        <div>
+          <h2>Play<br>Teen Patti</h2>
+          <p>Choose your table and start playing.</p>
+        </div>
+        <span class="btn btn-ruby p-cta"><i data-i="spade"></i>Play Now</span>
       </a>
     </div>
 
-    <div class="history-box">
-      <h3>Recent Games / हाल के खेल</h3>
+    <div class="quick">
+      <a href="buy-chips.html"><span class="q-ic"><i data-i="wallet"></i></span>Add Chips</a>
+      <a href="sell-chips.html"><span class="q-ic"><i data-i="bank"></i></span>Withdraw</a>
+      <a href="history.html"><span class="q-ic"><i data-i="history"></i></span>History</a>
+      <a href="profile.html"><span class="q-ic"><i data-i="user"></i></span>Profile</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card"><div class="stat-label"><i data-i="trophy"></i>Total Won</div><div class="stat-value" id="stat-won" style="color:var(--emerald-2)">0</div><div class="stat-sub">Lifetime winnings</div></div>
+      <div class="stat-card"><div class="stat-label"><i data-i="spade"></i>Games Played</div><div class="stat-value" id="stat-games">0</div><div class="stat-sub">Recent rounds</div></div>
+      <div class="stat-card"><div class="stat-label"><i data-i="target"></i>Win Rate</div><div class="stat-value" id="stat-rate">—</div><div class="stat-sub">Wins / games</div></div>
+      <div class="stat-card"><div class="stat-label"><i data-i="chart"></i>Net Result</div><div class="stat-value" id="stat-net">0</div><div class="stat-sub">Won − lost</div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title"><i data-i="history"></i>Recent Games <span class="hi muted" style="font-family:var(--font);font-size:13px;font-weight:400">हाल के खेल</span></div>
+        <a href="history.html" class="link">View all →</a>
+      </div>
       <div id="history-content"><div class="spinner"></div></div>
     </div>
   </main>
 </div>
-
+<nav id="tabbar"></nav>
 <div id="toast"></div>
+<script src="js/ui.js"></script>
 <script>
-function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
-document.addEventListener('click',function(e){const m=document.getElementById('mobile-menu');const h=document.querySelector('.hamburger');if(h&&!m.contains(e.target)&&!h.contains(e.target))m.classList.remove('open');});
-function logout(){localStorage.removeItem('token');localStorage.removeItem('user');window.location.href='login.html';}
 const token=localStorage.getItem('token');
 if(!token)window.location.href='login.html';
 document.getElementById('online-badge').textContent=(Math.floor(Math.random()*20)+8)+' players online now';
+const fmt=n=>Math.abs(n).toLocaleString('en-IN');
+function gameRow(h){
+  const win=h.result==='win';
+  const amt=win?h.chipsWon:h.chipsLost;
+  const cards=(h.playerCards||[]).length?'<div class="mini-cards">'+h.playerCards.map(c=>JP.card(c)).join('')+'</div>':'';
+  return `<div class="g-row"><div class="g-res ${win?'win':'loss'}">${JP.icon(win?'trophy':'x')}</div>
+    <div class="g-info"><b>${win?'Won the pot':'Lost the round'}</b><span>${new Date(h.createdAt).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</span></div>
+    ${cards}<div class="g-amt ${win?'win':'loss'}">${win?'+':'−'}₹${fmt(amt||0)}</div></div>`;
+}
 async function loadDashboard(){
   try{
-    const res=await fetch('/api/auth/me',{headers:{Authorization:token}});
-    if(!res.ok){logout();return;}
-    const user=await res.json();
-    document.getElementById('av-letter').textContent=user.name.charAt(0).toUpperCase();
-    document.getElementById('sb-name').textContent=user.name;
-    document.getElementById('sb-email').textContent=user.email;
-    document.getElementById('sb-chips').textContent=user.chips.toLocaleString();
-    document.getElementById('nav-chips').textContent=user.chips.toLocaleString();
-    document.getElementById('welcome-name').textContent=user.name.split(' ')[0];
-    document.getElementById('stat-chips').textContent=user.chips.toLocaleString();
+    let user;
+    try{user=await JP.me();}catch(e){logout();return;}
+    document.getElementById('stat-chips').textContent=user.chips.toLocaleString('en-IN');
+    document.getElementById('stat-rupees').textContent=user.chips.toLocaleString('en-IN');
     const histRes=await fetch('/api/game/history',{headers:{Authorization:token}});
     const history=await histRes.json();
-    let totalWon=0;history.forEach(h=>{if(h.result==='win')totalWon+=h.chipsWon;});
-    document.getElementById('stat-won').textContent=totalWon.toLocaleString();
+    let totalWon=0,totalLost=0,wins=0;
+    history.forEach(h=>{if(h.result==='win'){totalWon+=h.chipsWon;wins++;}else totalLost+=h.chipsLost||0;});
+    const net=totalWon-totalLost;
+    document.getElementById('stat-won').textContent=totalWon.toLocaleString('en-IN');
+    document.getElementById('stat-games').textContent=history.length;
+    document.getElementById('stat-rate').textContent=history.length?Math.round(wins/history.length*100)+'%':'—';
+    const ne=document.getElementById('stat-net');
+    ne.textContent=(net>0?'+':net<0?'−':'')+fmt(net);
+    ne.style.color=net>0?'var(--emerald-2)':net<0?'var(--ruby-2)':'';
     if(!history.length){
-      document.getElementById('history-content').innerHTML='<p style="color:var(--gray);text-align:center;padding:24px;">No games yet. <a href="game.html" style="color:var(--gold)">Play your first game!</a></p>';
+      document.getElementById('history-content').innerHTML='<div class="empty"><div class="empty-ic">'+JP.icon('spade')+'</div><p>No games yet.</p><a href="game.html" class="btn btn-ruby btn-sm" style="margin-top:14px">Play your first game</a></div>';
     }else{
-      document.getElementById('history-content').innerHTML=`<div class="table-scroll"><table class="data-table"><thead><tr><th>Date</th><th>Result</th><th>Won</th><th>Lost</th></tr></thead><tbody>${history.map(h=>`<tr><td style="font-size:12px;color:var(--gray)">${new Date(h.createdAt).toLocaleDateString('en-IN')}</td><td><span class="badge ${h.result==='win'?'badge-green':'badge-red'}">${h.result==='win'?'<svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg> WIN':'<svg class="ic" style="width:1em;height:1em;vertical-align:-0.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg> LOSS'}</span></td><td style="color:var(--green-glow)">${h.chipsWon>0?'+₹'+h.chipsWon:'-'}</td><td style="color:#ef9a9a">${h.chipsLost>0?'-₹'+h.chipsLost:'-'}</td></tr>`).join('')}</tbody></table></div>`;
+      document.getElementById('history-content').innerHTML='<div class="games">'+history.slice(0,6).map(gameRow).join('')+'</div>';
     }
-  }catch(e){document.getElementById('history-content').innerHTML='<p style="color:var(--gray);text-align:center;padding:20px;">Could not load. Is server running?</p>';}
+  }catch(e){document.getElementById('history-content').innerHTML='<div class="empty">Could not load. Is the server running?</div>';}
 }
 loadDashboard();
 </script>

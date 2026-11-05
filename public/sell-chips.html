@@ -2,98 +2,80 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <meta name="robots" content="noindex, nofollow"/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 <link rel="apple-touch-icon" href="icon-192.png"/>
-<meta name="theme-color" content="#0a0006"/>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#0a0710"/>
 <title>Withdraw — JeetPatti</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;600;700;800;900&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Inter',sans-serif;background:#0a0006;min-height:100vh;
-  background-image:radial-gradient(ellipse 130% 60% at 50% -5%,rgba(160,10,30,.5),transparent 55%),linear-gradient(180deg,#0a0006,#160005);}
-.bar{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;
-  background:rgba(10,0,6,.97);border-bottom:1px solid rgba(240,192,64,.2);}
-.logo{font-family:'Cinzel',serif;font-size:19px;font-weight:900;color:#f0c040;text-decoration:none;letter-spacing:2px;}
-.logo b{color:#ffab91;}
-.back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;font-weight:700;}
-.wrap{max-width:480px;margin:0 auto;padding:24px 18px 60px;}
-
-.bal-card{background:rgba(76,175,80,.1);border:1px solid rgba(76,175,80,.3);border-radius:16px;
-  padding:20px;text-align:center;margin-bottom:20px;}
-.bal-label{color:rgba(255,255,255,.5);font-size:12px;}
-.bal-amt{color:#81c784;font-size:28px;font-weight:900;margin-top:6px;}
-
-.soon-badge{background:linear-gradient(135deg,rgba(240,192,64,.15),rgba(240,192,64,.05));
-  border:1px solid rgba(240,192,64,.4);border-radius:16px;padding:16px;text-align:center;margin-bottom:22px;}
-.soon-badge .t1{color:#f0c040;font-weight:900;font-size:15px;margin-bottom:4px;}
-.soon-badge .t2{color:rgba(255,255,255,.5);font-size:12px;line-height:1.6;}
-
-.label{color:rgba(255,255,255,.5);font-size:12px;margin-bottom:8px;display:block;font-weight:600;}
-.input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
-  border-radius:12px;padding:14px;color:#fff;font-size:15px;margin-bottom:18px;font-family:inherit;}
-.input::placeholder{color:#555;}
-
-.wa-box{background:linear-gradient(135deg,#0d3b1e,#0a2814);border:1px solid rgba(76,175,80,.4);
-  border-radius:18px;padding:20px;text-align:center;margin-top:10px;}
-.wa-icon{font-size:38px;margin-bottom:8px;}
-.wa-title{color:#fff;font-weight:900;font-size:15px;margin-bottom:6px;}
-.wa-sub{color:rgba(255,255,255,.55);font-size:12px;line-height:1.7;margin-bottom:16px;}
-.wa-btn{display:block;background:#25D366;color:#fff;text-decoration:none;font-weight:900;
-  font-size:14px;padding:13px;border-radius:26px;text-align:center;border:none;width:100%;cursor:pointer;}
-.wa-btn:active{transform:scale(.98);}
-.wa-btn:disabled{opacity:.4;}
-
-.steps{margin-top:24px;background:rgba(255,255,255,.03);border-radius:14px;padding:16px;}
-.steps .st-title{color:#f0c040;font-weight:800;font-size:13px;margin-bottom:10px;}
-.steps ol{margin-left:18px;color:rgba(255,255,255,.55);font-size:12px;line-height:2;}
-</style>
+<link rel="stylesheet" href="css/style.css"/>
 </head>
-<body>
-<div class="bar">
-  <a href="dashboard.html" class="back">← Back</a>
-  <a href="index.html" class="logo">♣ Jeet<b>Patti</b></a>
-  <div style="width:50px"></div>
+<body data-page="sell">
+<header id="topbar"></header>
+<div class="app">
+  <aside id="sidebar"></aside>
+  <main class="main">
+    <a href="dashboard.html" class="back-link"><i data-i="left"></i>Back</a>
+    <div class="page-head">
+      <div>
+        <h1>Withdraw <span class="gold-text">Winnings</span></h1>
+        <p>Sell chips and get paid to your UPI. <span class="hi">चिप्स बेचो, पैसे पाओ</span></p>
+      </div>
+    </div>
+
+    <div class="wallet-grid">
+      <div>
+        <div class="bal-hero">
+          <div class="cchip green"></div>
+          <div class="lbl"><i data-i="wallet"></i>Available Balance</div>
+          <div class="big"><span id="balAmt">0</span><small>chips</small></div>
+          <div class="sub" id="balRupees">≈ ₹0</div>
+        </div>
+
+        <div class="notice">
+          <div class="n-ic"><i data-i="info"></i></div>
+          <div><b>Automatic withdrawal coming soon</b><span>For now, withdrawals are handled manually over WhatsApp so you get paid directly and fast.</span></div>
+        </div>
+
+        <div class="panel">
+          <div id="alert-box"></div>
+          <div class="form-group">
+            <label for="chipsInput">Chips to withdraw <span class="optional-tag">(minimum 1,000)</span></label>
+            <div class="field"><i data-i="coins"></i><input type="number" class="input amount-input" id="chipsInput" placeholder="1,000" min="1000" inputmode="numeric"></div>
+          </div>
+          <div class="quick-amts">
+            <button type="button" onclick="setAmt(1000)">1,000</button>
+            <button type="button" onclick="setAmt(2000)">2,000</button>
+            <button type="button" onclick="setAmt(5000)">5,000</button>
+            <button type="button" onclick="setAmt(currentBalance)">Max</button>
+          </div>
+          <div class="form-group">
+            <label for="upiInput">Your UPI ID <span class="optional-tag">(where we'll send the money)</span></label>
+            <div class="field"><i data-i="upi"></i><input type="text" class="input" id="upiInput" placeholder="yourname@upi" autocomplete="off"></div>
+          </div>
+          <div class="summary" style="margin-top:4px">
+            <div class="total"><span>You'll receive</span><b>₹<span id="receive">0</span></b></div>
+          </div>
+          <button class="btn btn-wa btn-full btn-lg" id="waBtn" onclick="startWithdraw()"><i data-i="whatsapp"></i>Message Us on WhatsApp</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><i data-i="sparkles"></i>How it works</div>
+        <ol class="steps-list">
+          <li>Enter the chips you want to withdraw</li>
+          <li>Enter your UPI ID</li>
+          <li>Tap "Message Us on WhatsApp"</li>
+          <li>We verify your balance and confirm</li>
+          <li>Money is sent to your UPI within a few hours, and your chip balance is updated once confirmed</li>
+        </ol>
+      </div>
+    </div>
+  </main>
 </div>
-
-<div class="wrap">
-  <div class="bal-card">
-    <div class="bal-label">Available Balance</div>
-    <div class="bal-amt" id="balAmt">0 chips</div>
-    <div id="balRupees" style="color:rgba(255,255,255,.5);font-size:13px;font-weight:700;margin-top:4px;">≈ ₹0</div>
-  </div>
-
-  <div class="soon-badge">
-    <div class="t1"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Automatic Withdrawal Coming Soon</div>
-    <div class="t2">For now, withdrawals are handled manually over WhatsApp so you get paid directly, fast.</div>
-  </div>
-
-  <label class="label">Chips to withdraw (minimum 1,000)</label>
-  <input type="number" class="input" id="chipsInput" placeholder="Enter chip amount" min="1000">
-
-  <label class="label">Your UPI ID (where we'll send the money)</label>
-  <input type="text" class="input" id="upiInput" placeholder="yourname@upi">
-
-  <div class="wa-box">
-    <div class="wa-icon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
-    <div class="wa-title">Withdraw via WhatsApp</div>
-    <div class="wa-sub">Tap below to message us directly.<br>We'll verify your balance and transfer the amount to your UPI ID.</div>
-    <button class="wa-btn" id="waBtn" onclick="startWithdraw()"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg> Message Us on WhatsApp</button>
-  </div>
-
-  <div class="steps">
-    <div class="st-title">How it works</div>
-    <ol>
-      <li>Enter the chips you want to withdraw</li>
-      <li>Enter your UPI ID</li>
-      <li>Tap "Message Us on WhatsApp"</li>
-      <li>We verify your balance and confirm</li>
-      <li>Money is sent to your UPI within a few hours, and your chip balance is updated once confirmed</li>
-    </ol>
-  </div>
-</div>
-
+<nav id="tabbar"></nav>
+<script src="js/ui.js"></script>
 <script>
 // ══════════════════════════════════════════════════════
 // PUT YOUR WHATSAPP NUMBER HERE — with country code, no
@@ -101,7 +83,6 @@ body{font-family:'Inter',sans-serif;background:#0a0006;min-height:100vh;
 // ══════════════════════════════════════════════════════
 const WHATSAPP_NUMBER = "917899735805"; // full number with country code, no + or spaces
 const CHIP_RATE = 1; // chips per ₹1 — keep in sync with config/economy.js
-const API_URL = "/api"; // change if your backend runs elsewhere
 
 const TK = localStorage.getItem('token');
 if(!TK) window.location.href = 'login.html';
@@ -109,43 +90,43 @@ if(!TK) window.location.href = 'login.html';
 let currentBalance = 0;
 let userInfo = { name: 'Unknown', phone: 'Not available', id: 'Unknown' };
 let sending = false;
+const WA_LABEL = document.getElementById('waBtn').innerHTML;
+
+function showAlert(msg,type){document.getElementById('alert-box').innerHTML='<div class="alert alert-'+(type||'error')+'">'+msg+'</div>';}
+function updReceive(){
+  const chips = parseInt(document.getElementById('chipsInput').value) || 0;
+  document.getElementById('receive').textContent = Math.floor(chips/CHIP_RATE).toLocaleString('en-IN');
+}
+function setAmt(n){document.getElementById('chipsInput').value = n || '';updReceive();}
+document.getElementById('chipsInput').addEventListener('input', updReceive);
 
 // Only reads balance/identity — never calls any deduction endpoint,
 // so it can't be blocked by backend fields this page doesn't collect
 // (like bank account details from the old automatic payout system).
 async function loadBalance(){
   try{
-    const res = await fetch(`${API_URL}/auth/me`, { headers: { Authorization: TK } });
-    const data = await res.json();
+    const data = await JP.me();
     currentBalance = data.chips || 0;
     userInfo.name = data.name || 'Unknown';
     userInfo.phone = data.phone || 'Not available';
     userInfo.id = data._id || data.id || 'Unknown';
-    document.getElementById('balAmt').textContent = currentBalance.toLocaleString() + ' chips';
-    document.getElementById('balRupees').textContent = '≈ ₹' + Math.floor(currentBalance / CHIP_RATE).toLocaleString();
+    document.getElementById('balAmt').textContent = currentBalance.toLocaleString('en-IN');
+    document.getElementById('balRupees').textContent = '≈ ₹' + Math.floor(currentBalance / CHIP_RATE).toLocaleString('en-IN');
   }catch(e){}
 }
 loadBalance();
 
 function startWithdraw(){
   if(sending)return;
+  document.getElementById('alert-box').innerHTML='';
 
   const chips = parseInt(document.getElementById('chipsInput').value) || 0;
   const upi = document.getElementById('upiInput').value.trim();
 
   // ══ VALIDATION — block entirely if anything is wrong ══
-  if(chips < 1000){
-    alert('Minimum withdrawal is 1,000 chips');
-    return;
-  }
-  if(!upi){
-    alert('Please enter your UPI ID');
-    return;
-  }
-  if(chips > currentBalance){
-    alert(`You only have ${currentBalance.toLocaleString()} chips.\nYou cannot withdraw more than your available balance.`);
-    return;
-  }
+  if(chips < 1000) return showAlert('Minimum withdrawal is 1,000 chips');
+  if(!upi) return showAlert('Please enter your UPI ID');
+  if(chips > currentBalance) return showAlert(`You only have ${currentBalance.toLocaleString()} chips. You cannot withdraw more than your available balance.`);
 
   sending = true;
   const btn = document.getElementById('waBtn');
@@ -169,13 +150,14 @@ User ID: ${userInfo.id}`;
   const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
   window.open(link, '_blank');
 
-  btn.innerHTML = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg> Sent — check WhatsApp';
+  btn.innerHTML = JP.icon('check') + ' Sent — check WhatsApp';
   document.getElementById('chipsInput').value = '';
+  updReceive();
 
   setTimeout(()=>{
     sending = false;
     btn.disabled = false;
-    btn.innerHTML = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg> Message Us on WhatsApp';
+    btn.innerHTML = WA_LABEL;
   }, 4000);
 }
 </script>

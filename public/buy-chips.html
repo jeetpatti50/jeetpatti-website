@@ -10,7 +10,7 @@
 <meta name="keywords" content="buy Teen Patti chips, add chips, JeetPatti chips, 3 Patti chips, buy chips online, Teen Patti recharge"/>
 <meta name="author" content="JeetPatti"/>
 <meta name="robots" content="index, follow"/>
-<meta name="theme-color" content="#0a0006"/>
+<meta name="theme-color" content="#0a0710"/>
 <link rel="canonical" href="https://jeetpatti.in/buy-chips.html"/>
 
 <!-- Favicon / Icons -->
@@ -33,89 +33,66 @@
 <meta name="twitter:title" content="Buy Chips — JeetPatti"/>
 <meta name="twitter:description" content="Add Teen Patti chips instantly and join live 3 Patti tables on JeetPatti."/>
 <meta name="twitter:image" content="https://jeetpatti.in/icon-512.png"/>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;600;700;800;900&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Inter',sans-serif;background:#0a0006;min-height:100vh;
-  background-image:radial-gradient(ellipse 130% 60% at 50% -5%,rgba(160,10,30,.5),transparent 55%),linear-gradient(180deg,#0a0006,#160005);}
-.bar{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;
-  background:rgba(10,0,6,.97);border-bottom:1px solid rgba(240,192,64,.2);}
-.logo{font-family:'Cinzel',serif;font-size:19px;font-weight:900;color:#f0c040;text-decoration:none;letter-spacing:2px;}
-.logo b{color:#ffab91;}
-.back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;font-weight:700;}
-.wrap{max-width:480px;margin:0 auto;padding:24px 18px 60px;}
-
-.soon-badge{background:linear-gradient(135deg,rgba(240,192,64,.15),rgba(240,192,64,.05));
-  border:1px solid rgba(240,192,64,.4);border-radius:16px;padding:16px;text-align:center;margin-bottom:22px;}
-.soon-badge .t1{color:#f0c040;font-weight:900;font-size:15px;margin-bottom:4px;}
-.soon-badge .t2{color:rgba(255,255,255,.5);font-size:12px;line-height:1.6;}
-
-h2{color:#fff;font-size:16px;margin-bottom:14px;font-weight:800;}
-.rate{color:#f0c040;text-align:center;font-size:13px;font-weight:700;margin-bottom:18px;}
-
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
-.pkg{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;
-  padding:16px;text-align:center;cursor:pointer;transition:all .15s;}
-.pkg:active,.pkg.on{border-color:#f0c040;background:rgba(240,192,64,.1);}
-.pkg .amt{color:#fff;font-size:18px;font-weight:900;}
-.pkg .chips{color:rgba(255,255,255,.4);font-size:11px;margin-top:4px;}
-
-.wa-box{background:linear-gradient(135deg,#0d3b1e,#0a2814);border:1px solid rgba(76,175,80,.4);
-  border-radius:18px;padding:20px;text-align:center;margin-top:8px;}
-.wa-icon{font-size:38px;margin-bottom:8px;}
-.wa-title{color:#fff;font-weight:900;font-size:15px;margin-bottom:6px;}
-.wa-sub{color:rgba(255,255,255,.55);font-size:12px;line-height:1.7;margin-bottom:16px;}
-.wa-btn{display:block;background:#25D366;color:#fff;text-decoration:none;font-weight:900;
-  font-size:14px;padding:13px;border-radius:26px;text-align:center;}
-.wa-btn:active{transform:scale(.98);}
-
-.steps{margin-top:24px;background:rgba(255,255,255,.03);border-radius:14px;padding:16px;}
-.steps .st-title{color:#f0c040;font-weight:800;font-size:13px;margin-bottom:10px;}
-.steps ol{margin-left:18px;color:rgba(255,255,255,.55);font-size:12px;line-height:2;}
-</style>
+<link rel="stylesheet" href="css/style.css"/>
 </head>
-<body>
-<div class="bar">
-  <a href="dashboard.html" class="back">← Back</a>
-  <a href="index.html" class="logo">♣ Jeet<b>Patti</b></a>
-  <div style="width:50px"></div>
+<body data-page="buy">
+<header id="topbar"></header>
+<div class="app">
+  <aside id="sidebar"></aside>
+  <main class="main">
+    <a href="dashboard.html" class="back-link"><i data-i="left"></i>Back</a>
+    <div class="page-head">
+      <div>
+        <h1>Add <span class="gold-text">Chips</span></h1>
+        <p>₹1 = 1 Chip · Current balance: <b class="js-chips" style="color:var(--gold)">—</b> chips</p>
+      </div>
+    </div>
+
+    <div class="notice">
+      <div class="n-ic"><i data-i="info"></i></div>
+      <div><b>Automatic payment coming soon</b><span>For now, add cash directly through WhatsApp — your chips are added personally by our team, usually within minutes.</span></div>
+    </div>
+
+    <div class="wallet-grid">
+      <div class="panel">
+        <div class="panel-title"><i data-i="coins"></i>Choose a package</div>
+        <div class="pkg-grid" id="pkgGrid">
+          <button class="pkg pkg-opt on" data-amt="1000"><div class="cchip blue"></div><div><div class="amt">₹1,000</div><div class="chips">1,000 chips · Starter</div></div></button>
+          <button class="pkg pkg-opt" data-amt="2000"><span class="tag">POPULAR</span><div class="cchip"></div><div><div class="amt">₹2,000</div><div class="chips">2,000 chips · Best value</div></div></button>
+          <button class="pkg pkg-opt" data-amt="5000"><div class="cchip green"></div><div><div class="amt">₹5,000</div><div class="chips">5,000 chips · Pro</div></div></button>
+          <button class="pkg pkg-opt" data-amt="10000"><div class="cchip gold"></div><div><div class="amt">₹10,000</div><div class="chips">10,000 chips · High roller</div></div></button>
+        </div>
+
+        <div class="summary">
+          <div><span>Package</span><b>₹<span id="sumAmt">1,000</span></b></div>
+          <div><span>Chips you get</span><b><span id="sumChips">1,000</span> chips</b></div>
+          <div class="total"><span>You pay</span><b>₹<span id="sumPay">1,000</span></b></div>
+        </div>
+
+        <a href="#" class="btn btn-wa btn-full btn-lg" id="waBtn" target="_blank" rel="noopener"><i data-i="whatsapp"></i>Buy on WhatsApp</a>
+        <p style="text-align:center;color:var(--dim);font-size:12.5px;margin-top:12px">We'll reply with our UPI ID / QR code.</p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><i data-i="sparkles"></i>How it works</div>
+        <ol class="steps-list">
+          <li>Tap the WhatsApp button</li>
+          <li>We'll send our UPI ID or QR code</li>
+          <li>Pay the amount via any UPI app</li>
+          <li>Send us the payment screenshot</li>
+          <li>Chips are added to your account</li>
+        </ol>
+        <div class="divider" style="margin:22px 0 16px">Safe &amp; simple</div>
+        <div style="display:flex;flex-direction:column;gap:10px;color:var(--muted);font-size:13.5px">
+          <span style="display:flex;gap:10px;align-items:center"><i data-i="shield" style="color:var(--emerald)"></i>Every payment verified by our team</span>
+          <span style="display:flex;gap:10px;align-items:center"><i data-i="upi" style="color:var(--emerald)"></i>Works with GPay, PhonePe, Paytm</span>
+        </div>
+      </div>
+    </div>
+  </main>
 </div>
-
-<div class="wrap">
-  <div class="soon-badge">
-    <div class="t1"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Automatic Payment Coming Soon</div>
-    <div class="t2">For now, add cash directly through WhatsApp — it's fast and 100% manual, so your chips are added personally by our team.</div>
-  </div>
-
-  <h2>Choose a package</h2>
-  <div class="rate">₹1 = 1 Chip</div>
-
-  <div class="grid" id="pkgGrid">
-    <div class="pkg on" data-amt="1000"><div class="amt">₹1,000</div><div class="chips">1,000 chips</div></div>
-    <div class="pkg" data-amt="2000"><div class="amt">₹2,000</div><div class="chips">2,000 chips</div></div>
-    <div class="pkg" data-amt="5000"><div class="amt">₹5,000</div><div class="chips">5,000 chips</div></div>
-    <div class="pkg" data-amt="10000"><div class="amt">₹10,000</div><div class="chips">10,000 chips</div></div>
-  </div>
-
-  <div class="wa-box">
-    <div class="wa-icon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;color:#fff"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
-    <div class="wa-title">Buy Chips on WhatsApp</div>
-    <div class="wa-sub">Tap below to message us your selected package.<br>We'll reply with our UPI ID / QR code — pay, send the screenshot, and your chips are added within minutes.</div>
-    <a href="#" class="wa-btn" id="waBtn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg> Message on WhatsApp</a>
-  </div>
-
-  <div class="steps">
-    <div class="st-title">How it works</div>
-    <ol>
-      <li>Tap the WhatsApp button above</li>
-      <li>We'll send our UPI ID or QR code</li>
-      <li>Pay the amount via any UPI app</li>
-      <li>Send us the payment screenshot</li>
-      <li>Chips are added to your account instantly</li>
-    </ol>
-  </div>
-</div>
-
+<nav id="tabbar"></nav>
+<script src="js/ui.js"></script>
 <script>
 // ══════════════════════════════════════════════════════
 // PUT YOUR WHATSAPP NUMBER HERE — with country code, no
@@ -123,7 +100,6 @@ h2{color:#fff;font-size:16px;margin-bottom:14px;font-weight:800;}
 // ══════════════════════════════════════════════════════
 const WHATSAPP_NUMBER = "917899735805"; // full number with country code, no + or spaces
 const CHIP_RATE = 1; // chips per ₹1 — keep in sync with config/economy.js
-const API_URL = "/api"; // change if your backend runs elsewhere
 
 const TK = localStorage.getItem('token');
 if(!TK) window.location.href = 'login.html';
@@ -134,8 +110,7 @@ let userInfo = { name: 'Unknown', phone: 'Not available', id: 'Unknown' };
 // ══ Load the logged-in player's identity so the request can be verified ══
 async function loadUser(){
   try{
-    const res = await fetch(`${API_URL}/auth/me`, { headers: { Authorization: TK } });
-    const data = await res.json();
+    const data = await JP.me();
     userInfo.name = data.name || 'Unknown';
     userInfo.phone = data.phone || 'Not available';
     userInfo.id = data._id || data.id || 'Unknown';
@@ -154,6 +129,10 @@ document.querySelectorAll('.pkg').forEach(el=>{
 });
 
 function updateWaLink(){
+  const f = n => n.toLocaleString('en-IN');
+  document.getElementById('sumAmt').textContent = f(selectedAmt);
+  document.getElementById('sumChips').textContent = f(selectedAmt*CHIP_RATE);
+  document.getElementById('sumPay').textContent = f(selectedAmt);
   const msg =
 `Hi! I want to buy chips on JeetPatti.
 

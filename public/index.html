@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +10,7 @@
   <meta name="keywords" content="Teen Patti, 3 Patti, Teen Patti online, JeetPatti, play Teen Patti, Indian card game, online card game, buy chips"/>
   <meta name="author" content="JeetPatti"/>
   <meta name="robots" content="index, follow"/>
-  <meta name="theme-color" content="#0a0006"/>
+  <meta name="theme-color" content="#0a0710"/>
   <link rel="canonical" href="https://jeetpatti.in/"/>
 
   <!-- Favicon / Icons -->
@@ -75,210 +74,322 @@
   }
   </script>
 
+
   <link rel="stylesheet" href="css/style.css"/>
   <style>
-    .hero{min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:60px 20px;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(26,90,26,0.5) 0%,transparent 70%);}
-    .hero-content{position:relative;z-index:1;max-width:680px;width:100%;}
-    .hero-eyebrow{display:inline-block;border:1px solid var(--gold-dark);color:var(--gold);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:6px 18px;border-radius:20px;margin-bottom:24px;background:rgba(240,192,64,0.08);}
-    .hero h1{font-size:clamp(36px,8vw,70px);line-height:1.05;margin-bottom:10px;}
-    .hero h1 .line1{color:var(--white);display:block;}
-    .hero h1 .line2{color:var(--gold);display:block;}
-    .hero-sub{font-size:15px;color:var(--gray);margin:18px auto 32px;max-width:460px;line-height:1.7;}
-    .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-    .features{padding:60px 20px;}
-    .section-title{text-align:center;margin-bottom:40px;}
-    .section-title h2{font-size:28px;color:var(--gold);margin-bottom:8px;}
-    .section-title p{color:var(--gray);font-size:14px;}
-    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:940px;margin:0 auto;}
-    .feature-card{background:var(--green-mid);border:1px solid rgba(240,192,64,0.12);border-radius:var(--radius-lg);padding:24px 20px;text-align:center;transition:all .2s;}
-    .feature-card:hover{border-color:rgba(240,192,64,0.35);transform:translateY(-3px);}
-    .feature-icon{width:40px;height:40px;margin:0 auto 14px;display:block;color:var(--gold);stroke-width:1.7;}
-    .bn-icon{display:block;margin:0 auto 2px;}
-    .bn-icon svg{width:22px;height:22px;display:block;margin:0 auto;}
-    .feature-card h3{font-size:16px;color:var(--white);margin-bottom:8px;}
-    .feature-card p{font-size:13px;color:var(--gray);line-height:1.6;}
-    .how-section{padding:60px 20px;background:rgba(15,45,15,0.3);}
-    .steps{display:flex;max-width:860px;margin:0 auto;position:relative;}
-    .steps::before{content:'';position:absolute;top:34px;left:60px;right:60px;height:2px;background:linear-gradient(90deg,var(--green-bright),var(--gold-dark),var(--green-bright));opacity:.4;}
-    .step{flex:1;text-align:center;padding:0 12px;}
-    .step-num{width:68px;height:68px;border-radius:50%;background:var(--green-table);border:2px solid var(--gold-dark);color:var(--gold);font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:'Cinzel',serif;position:relative;z-index:1;}
-    .step h3{font-size:14px;color:var(--white);margin-bottom:6px;}
-    .step p{font-size:12px;color:var(--gray);line-height:1.5;}
-    /* Rate highlight */
-    .rate-highlight{background:linear-gradient(135deg,rgba(240,192,64,0.12),rgba(240,192,64,0.05));border:1px solid rgba(240,192,64,0.3);border-radius:var(--radius-lg);padding:28px 24px;text-align:center;margin:0 20px 60px;max-width:600px;margin-left:auto;margin-right:auto;}
-    .rate-big{font-family:'Cinzel',serif;font-size:clamp(28px,5vw,48px);font-weight:700;color:var(--gold);margin-bottom:6px;}
-    .rate-sub{color:var(--gray);font-size:14px;}
-    /* Packages */
-    .pkg-section{padding:0 20px 60px;}
-    .pkg-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;max-width:860px;margin:0 auto;}
-    .pkg-box{background:var(--green-mid);border:1px solid rgba(240,192,64,0.15);border-radius:var(--radius-lg);padding:24px 18px;text-align:center;min-width:150px;flex:1;transition:all .2s;cursor:pointer;}
-    .pkg-box:hover{border-color:var(--gold-dark);box-shadow:var(--shadow-gold);}
-    .pkg-box.pop{border-color:var(--gold-dark);box-shadow:var(--shadow-gold);position:relative;}
-    .pkg-box.pop::before{content:'POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold-dark);color:#1a0f00;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;}
-    .pkg-chips{font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:var(--gold);}
-    .pkg-label{font-size:12px;color:var(--gray);margin-bottom:10px;}
-    .pkg-price{font-size:20px;font-weight:600;color:var(--white);margin-bottom:4px;}
-    .pkg-rate{font-size:11px;color:var(--green-glow);}
-    /* CTA */
-    .cta-banner{margin:0 20px 60px;background:linear-gradient(135deg,var(--green-table),var(--green-mid));border:1px solid rgba(240,192,64,0.3);border-radius:var(--radius-lg);padding:40px 24px;text-align:center;box-shadow:var(--shadow-gold);}
-    .cta-banner h2{font-size:26px;color:var(--gold);margin-bottom:10px;}
-    .cta-banner p{color:var(--gray);font-size:14px;margin-bottom:24px;}
-    @media(max-width:768px){
-      .features-grid{grid-template-columns:1fr 1fr;}
-      .steps{flex-direction:column;align-items:center;gap:20px;}
-      .steps::before{display:none;}
-      .step{width:100%;max-width:260px;}
-      .pkg-box{min-width:calc(50% - 8px);flex:none;}
+    /* HERO */
+    .hero { position: relative; padding: clamp(36px, 7vw, 90px) 0 clamp(48px, 8vw, 100px); overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; }
+    .hero h1 { font-size: clamp(40px, 6.4vw, 76px); line-height: 1.02; font-weight: 900; margin: 22px 0 18px; }
+    .hero h1 .hi-line { display: block; font-family: 'Noto Sans Devanagari', var(--font); font-weight: 700; font-size: .62em; color: var(--text); letter-spacing: 0; margin-bottom: 6px; }
+    .hero-sub { font-size: clamp(15.5px, 1.6vw, 18px); color: var(--muted); line-height: 1.65; max-width: 520px; }
+    .hero-sub small { display: block; margin-top: 6px; color: var(--dim); font-size: 14px; }
+    .hero-btns { display: flex; gap: 12px; margin: 30px 0 28px; flex-wrap: wrap; }
+    .trust { display: flex; gap: 22px; flex-wrap: wrap; color: var(--muted); font-size: 13.5px; }
+    .trust span { display: inline-flex; align-items: center; gap: 7px; }
+    .trust .ic { color: var(--emerald); }
+
+    /* hero visual: felt table with a fanned Trail */
+    .stage { position: relative; aspect-ratio: 1 / .86; max-width: 560px; margin-left: auto; width: 100%; }
+    .felt {
+      position: absolute; inset: 14% 2% 10%; border-radius: 50%;
+      background: radial-gradient(ellipse at 50% 40%, #1a8a4b 0%, #0e6236 45%, #073a1f 100%);
+      box-shadow: 0 0 0 10px #2a1408, 0 0 0 12px #c98e17, 0 0 0 16px #1a0c05, 0 40px 90px rgba(0,0,0,.7), inset 0 0 60px rgba(0,0,0,.55);
     }
-    @media(max-width:480px){.features-grid{grid-template-columns:1fr;}}
+    .felt::after { content: 'JEETPATTI'; position: absolute; left: 0; right: 0; bottom: 18%; text-align: center; font-family: var(--display); letter-spacing: 10px; font-size: 13px; color: rgba(255,255,255,.12); }
+    .fan { position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%); width: 0; height: 0; }
+    .fan .pcard { --w: clamp(84px, 11vw, 118px); position: absolute; left: calc(var(--w) / -2); top: calc(var(--w) * -.71); transform-origin: 50% 120%; animation: fanIn 1s cubic-bezier(.2,.9,.3,1.15) both; }
+    .fan .pcard:nth-child(1) { --r: -18deg; animation-delay: .1s; }
+    .fan .pcard:nth-child(2) { --r: 0deg; animation-delay: .25s; z-index: 2; }
+    .fan .pcard:nth-child(3) { --r: 18deg; animation-delay: .4s; z-index: 3; }
+    .fan .pcard { transform: rotate(var(--r)); }
+    @keyframes fanIn { from { transform: rotate(0) translateY(60px); opacity: 0; } to { transform: rotate(var(--r)); opacity: 1; } }
+    .stage .cchip { position: absolute; animation: floaty 5s ease-in-out infinite; }
+    .stage .c1 { --s: 64px; left: 4%; top: 12%; }
+    .stage .c2 { --s: 50px; right: 6%; top: 6%; animation-delay: -1.5s; }
+    .stage .c3 { --s: 56px; right: 2%; bottom: 14%; animation-delay: -3s; }
+    .stage .c4 { --s: 42px; left: 12%; bottom: 8%; animation-delay: -2s; }
+    @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-14px) rotate(14deg); } }
+    .hand-tag {
+      position: absolute; left: 50%; bottom: 20%; transform: translateX(-50%); z-index: 4;
+      background: rgba(10,7,16,.85); border: 1px solid var(--line-gold); border-radius: 30px;
+      padding: 8px 16px; font-size: 13px; font-weight: 700; color: var(--gold-2); white-space: nowrap;
+      display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow);
+    }
+    .glow-orb { position: absolute; inset: 20% 15%; background: radial-gradient(circle, rgba(245,197,66,.25), transparent 65%); filter: blur(30px); }
+
+    /* STAT STRIP */
+    .strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: var(--radius-lg); background: rgba(255,255,255,.03); overflow: hidden; }
+    .strip > div { padding: 22px 20px; border-right: 1px solid var(--line); }
+    .strip > div:last-child { border-right: 0; }
+    .strip b { display: block; font-size: clamp(22px, 2.6vw, 30px); font-weight: 800; letter-spacing: -.5px; }
+    .strip span { color: var(--muted); font-size: 13.5px; }
+
+    /* FEATURES */
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature { padding: 26px 24px; border-radius: var(--radius-lg); background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02)); border: 1px solid var(--line); transition: transform .25s, border-color .25s; }
+    .feature:hover { transform: translateY(-4px); border-color: var(--line-gold); }
+    .f-ic { width: 50px; height: 50px; border-radius: 15px; display: grid; place-items: center; margin-bottom: 18px; background: rgba(245,197,66,.1); color: var(--gold); border: 1px solid var(--line-gold); }
+    .f-ic .ic { width: 24px; height: 24px; }
+    .feature:nth-child(2n) .f-ic { background: rgba(225,29,72,.12); color: var(--ruby-2); border-color: rgba(225,29,72,.35); }
+    .feature:nth-child(3n) .f-ic { background: rgba(34,197,94,.1); color: var(--emerald-2); border-color: rgba(34,197,94,.3); }
+    .feature h3 { font-family: var(--font); font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .feature p { color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+    .feature small { display: block; color: var(--dim); margin-top: 6px; }
+
+    /* HAND RANKINGS */
+    .ranks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .rank { display: flex; align-items: center; gap: 18px; padding: 18px 20px; border-radius: var(--radius-lg); background: rgba(255,255,255,.035); border: 1px solid var(--line); }
+    .rank .num { font-family: var(--display); font-weight: 900; font-size: 15px; color: var(--gold); width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; background: rgba(245,197,66,.1); flex-shrink: 0; }
+    .rank .hand { display: flex; }
+    .rank .hand .pcard { --w: 40px; margin-left: -12px; box-shadow: -3px 4px 10px rgba(0,0,0,.45); }
+    .rank .hand .pcard:first-child { margin-left: 0; }
+    .rank .hand .pcard .pc-c.br { display: none; }
+    .rank .hand .pcard .pc-s { font-size: 17px; padding-top: 12px; }
+    .rank h3 { font-family: var(--font); font-size: 16px; font-weight: 700; }
+    .rank p { color: var(--muted); font-size: 13px; margin-top: 2px; }
+    .rank:first-child { border-color: var(--line-gold); background: linear-gradient(135deg, rgba(245,197,66,.1), rgba(245,197,66,.02)); }
+
+    /* STEPS */
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: st; }
+    .step { position: relative; padding: 26px 22px; border-radius: var(--radius-lg); border: 1px solid var(--line); background: rgba(255,255,255,.03); }
+    .step::before { counter-increment: st; content: '0' counter(st); font-family: var(--display); font-size: 46px; font-weight: 900; line-height: 1; display: block; margin-bottom: 16px; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; opacity: .9; }
+    .step h3 { font-family: var(--font); font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+    .step p { color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+    /* PACKAGES */
+    .pkgs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .pkg { position: relative; text-align: center; padding: 28px 18px 24px; border-radius: var(--radius-lg); border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); text-decoration: none; color: inherit; transition: transform .25s, border-color .25s, box-shadow .25s; }
+    .pkg:hover { transform: translateY(-5px); border-color: var(--line-gold); box-shadow: var(--glow-gold); }
+    .pkg .cchip { margin: 0 auto 16px; }
+    .pkg .amt { font-size: 30px; font-weight: 800; letter-spacing: -.5px; }
+    .pkg .lbl { color: var(--muted); font-size: 13.5px; margin: 2px 0 14px; }
+    .pkg .price { display: inline-block; padding: 7px 16px; border-radius: 30px; background: var(--surface-2); font-weight: 700; font-size: 15px; }
+    .pkg.pop { border-color: var(--gold); box-shadow: var(--glow-gold); background: linear-gradient(180deg, rgba(245,197,66,.14), rgba(245,197,66,.03)); }
+    .pkg.pop .price { background: var(--gold-grad); color: #2a1600; }
+    .pkg .ribbon { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--ruby-grad); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 1px; padding: 5px 12px; border-radius: 20px; white-space: nowrap; box-shadow: 0 6px 16px rgba(225,29,72,.4); }
+
+    /* CTA */
+    .cta { position: relative; overflow: hidden; text-align: center; padding: clamp(40px, 6vw, 72px) 24px; border-radius: var(--radius-xl); border: 1px solid var(--line-gold); background: radial-gradient(ellipse at 50% 0%, rgba(225,29,72,.35), transparent 60%), linear-gradient(135deg, #1d0f2b, #120a1a); box-shadow: var(--shadow-lg); }
+    .cta h2 { font-size: clamp(28px, 4.4vw, 46px); font-weight: 900; margin-bottom: 12px; }
+    .cta p { color: var(--muted); font-size: 16px; margin-bottom: 28px; }
+    .cta .cchip { position: absolute; opacity: .55; }
+
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 10px; text-align: center; }
+      .hero-sub { margin: 0 auto; }
+      .hero-btns, .trust { justify-content: center; }
+      .stage { margin: 0 auto; max-width: 440px; order: -1; }
+      .features-grid, .ranks { grid-template-columns: 1fr 1fr; }
+      .steps, .pkgs { grid-template-columns: 1fr 1fr; }
+      .strip { grid-template-columns: 1fr 1fr; }
+      .strip > div:nth-child(2) { border-right: 0; }
+      .strip > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    }
+    @media (max-width: 600px) {
+      .stage { max-width: 330px; }
+      .hero { padding-top: 16px; }
+      .features-grid, .ranks { grid-template-columns: 1fr; }
+      .hero-btns .btn { flex: 1; }
+      .pkg .amt { font-size: 24px; }
+      .step::before { font-size: 36px; }
+    }
   </style>
 </head>
 <body>
 <nav class="navbar">
-  <a href="index.html" class="brand">♣ Jeet<span>Patti</span></a>
+  <a href="index.html" class="brand"><span class="brand-mark">♠</span><span class="wm">Jeet<b>Patti</b></span></a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="game.html">Play / खेलें</a>
+    <a href="index.html" class="active">Home</a>
+    <a href="game.html">Play</a>
+    <a href="#rankings">Hand Rankings</a>
     <a href="buy-chips.html">Buy Chips</a>
     <a href="login.html">Login</a>
   </div>
-  <div style="display:flex;gap:10px;align-items:center;">
+  <div class="nav-right">
     <a href="register.html" class="btn btn-gold btn-sm">Join Free</a>
-    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
-  <a href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:.35em;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home / होम</a>
-  <a href="game.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:.35em;"><path d="M12 3C9 7 5 8.5 5 12a3 3 0 0 0 5 2c-.4 2-1 3-2 4h8c-1-1-1.6-2-2-4a3 3 0 0 0 5-2c0-3.5-4-5-7-9z"/></svg>Play Teen Patti / खेलें</a>
-  <a href="buy-chips.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:.35em;"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Buy Chips / चिप्स खरीदें</a>
+  <a href="index.html"><i data-i="home"></i>Home / होम</a>
+  <a href="game.html"><i data-i="spade"></i>Play Teen Patti / खेलें</a>
+  <a href="#rankings"><i data-i="crown"></i>Hand Rankings</a>
+  <a href="buy-chips.html"><i data-i="wallet"></i>Buy Chips / चिप्स खरीदें</a>
   <div class="divider-line"></div>
-  <a href="login.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:.35em;"><circle cx="8" cy="15" r="4"/><path d="M10.85 12.15L21 2M18 5l2 2M15 8l2 2"/></svg>Login / लॉगिन</a>
-  <a href="register.html" style="color:var(--gold)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:.35em;"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 18l-6.3 3.2L7 14.2l-5-4.8 7-.9z"/></svg>Join Free – Get 100 Chips!</a>
+  <a href="login.html"><i data-i="login"></i>Login / लॉगिन</a>
+  <a href="register.html"><i data-i="gift"></i>Join Free – Get 100 Chips</a>
 </div>
 <nav class="bottom-nav">
-  <a href="index.html" class="active"><span class="bn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span>Home</a>
-  <a href="game.html"><span class="bn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C9 7 5 8.5 5 12a3 3 0 0 0 5 2c-.4 2-1 3-2 4h8c-1-1-1.6-2-2-4a3 3 0 0 0 5-2c0-3.5-4-5-7-9z"/></svg></span>Play</a>
-  <a href="buy-chips.html"><span class="bn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>Buy</a>
-  <a href="login.html"><span class="bn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span>Login</a>
+  <a href="index.html" class="active"><span class="bn-icon"><i data-i="home"></i></span>Home</a>
+  <a href="#rankings"><span class="bn-icon"><i data-i="crown"></i></span>Ranks</a>
+  <a href="game.html" class="bn-play"><span class="bn-icon"><i data-i="spade"></i></span>Play</a>
+  <a href="buy-chips.html"><span class="bn-icon"><i data-i="wallet"></i></span>Buy</a>
+  <a href="login.html"><span class="bn-icon"><i data-i="user"></i></span>Login</a>
 </nav>
 
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-content">
-    <div class="hero-eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:.35em;"><path d="M12 3C9 7 5 8.5 5 12a3 3 0 0 0 5 2c-.4 2-1 3-2 4h8c-1-1-1.6-2-2-4a3 3 0 0 0 5-2c0-3.5-4-5-7-9z"/></svg>India's Favourite Card Game</div>
-    <h1>
-      <span class="line1">जीतो हर बार</span>
-      <span class="line2">JeetPatti</span>
-    </h1>
-    <p class="hero-sub">
-      Play Teen Patti online with chips. Buy chips, play against real players, win big and sell your chips back for real money!<br>
-      <small>चिप्स से खेलो, असली खिलाड़ियों से जीतो, पैसे पाओ!</small>
-    </p>
-    <div class="hero-btns">
-      <a href="register.html" class="btn btn-gold btn-lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:.35em;"><path d="M12 3C9 7 5 8.5 5 12a3 3 0 0 0 5 2c-.4 2-1 3-2 4h8c-1-1-1.6-2-2-4a3 3 0 0 0 5-2c0-3.5-4-5-7-9z"/></svg>Start Playing / शुरू करें</a>
-      <a href="login.html" class="btn btn-outline btn-lg">Login / लॉगिन</a>
+<!-- HERO -->
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow"><span class="live-dot"></span>India's favourite card game</span>
+      <h1>
+        <span class="hi-line">जीतो हर बार</span>
+        Play Teen Patti<br><span class="gold-text">like a King.</span>
+      </h1>
+      <p class="hero-sub">
+        Real tables, real chips, real wins. Buy chips at ₹1 = 1 chip, play fast 3 Patti rounds and sell your chips back for money.
+        <small class="hi">चिप्स से खेलो, जीतो और पैसे पाओ!</small>
+      </p>
+      <div class="hero-btns">
+        <a href="register.html" class="btn btn-gold btn-lg"><i data-i="spade"></i>Start Playing</a>
+        <a href="login.html" class="btn btn-ghost btn-lg">Login</a>
+      </div>
+      <div class="trust">
+        <span><i data-i="shield"></i>Secure payments</span>
+        <span><i data-i="bolt"></i>Instant chips</span>
+        <span><i data-i="gift"></i>100 free chips</span>
+      </div>
+    </div>
+
+    <div class="stage" aria-hidden="true">
+      <div class="glow-orb"></div>
+      <div class="felt"></div>
+      <div class="fan">
+        <div class="pcard"><div class="pc-c tl">A<i>♠</i></div><div class="pc-s">♠</div><div class="pc-c br">A<i>♠</i></div></div>
+        <div class="pcard red"><div class="pc-c tl">A<i>♥</i></div><div class="pc-s">♥</div><div class="pc-c br">A<i>♥</i></div></div>
+        <div class="pcard red"><div class="pc-c tl">A<i>♦</i></div><div class="pc-s">♦</div><div class="pc-c br">A<i>♦</i></div></div>
+      </div>
+      <div class="hand-tag"><i data-i="crown"></i>Trail of Aces · Best hand</div>
+      <div class="cchip gold c1"></div>
+      <div class="cchip c2"></div>
+      <div class="cchip black c3"></div>
+      <div class="cchip green c4"></div>
     </div>
   </div>
-</section>
+</header>
 
-<!-- Rate highlight -->
-<div class="rate-highlight">
-  <div class="rate-big">₹1 = 1 Chip</div>
-  <div class="rate-sub">Simple & transparent • 1 रुपया = 1 चिप • No hidden charges</div>
+<!-- STRIP -->
+<div class="container reveal">
+  <div class="strip">
+    <div><b class="gold-text">₹1 = 1</b><span>Chip — simple &amp; transparent</span></div>
+    <div><b>100</b><span>Free chips when you join</span></div>
+    <div><b>3 Patti</b><span>Classic Indian rules</span></div>
+    <div><b>24/7</b><span>Tables always open</span></div>
+  </div>
 </div>
 
-<!-- Features -->
-<section class="features">
-  <div class="section-title">
-    <h2>Why JeetPatti?</h2>
-    <p>The safest and most fun way to play / सबसे सुरक्षित तरीका</p>
-  </div>
-  <div class="features-grid">
-    <div class="feature-card">
-      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      <h3>Real Players</h3>
-      <p>Play with real players from across India. Exciting games every time!<br><small style="color:#555">असली खिलाड़ियों के साथ खेलें</small></p>
+<!-- FEATURES -->
+<section class="section">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">Why JeetPatti</span>
+      <h2>Built for <span class="gold-text">serious fun</span></h2>
+      <p>The safest and smoothest way to play Teen Patti online. <span class="hi">सबसे सुरक्षित तरीका।</span></p>
     </div>
-    <div class="feature-card">
-      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
-      <h3>Real Chips, Real Value</h3>
-      <p>₹1 = 1 Chip. Buy chips, play and win more. Sell chips back anytime.<br><small style="color:#555">चिप्स बेचो, पैसे पाओ</small></p>
-    </div>
-    <div class="feature-card">
-      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-      <h3>100% Secure</h3>
-      <p>All payments via Razorpay. Your money and data are completely safe.<br><small style="color:#555">पूरी तरह सुरक्षित भुगतान</small></p>
-    </div>
-    <div class="feature-card">
-      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      <h3>Instant Chips</h3>
-      <p>Chips credited to your account instantly after payment. No delays.<br><small style="color:#555">तुरंत चिप्स मिलेंगे</small></p>
-    </div>
-    <div class="feature-card">
-      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>
-      <h3>Play Anywhere</h3>
-      <p>Works on mobile, tablet and computer. Play anytime, anywhere!<br><small style="color:#555">कहीं भी, कभी भी खेलो</small></p>
-    </div>
-    <div class="feature-card">
-      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/></svg>
-      <h3>Easy Withdrawal</h3>
-      <p>Sell your chips and get money directly in your bank account.<br><small style="color:#555">बैंक में सीधे पैसे पाओ</small></p>
+    <div class="features-grid">
+      <div class="feature reveal"><div class="f-ic"><i data-i="users"></i></div><h3>Live Tables</h3><p>Sit down with players from across India — a fresh table every round.<small class="hi">असली खिलाड़ियों के साथ खेलें</small></p></div>
+      <div class="feature reveal"><div class="f-ic"><i data-i="coins"></i></div><h3>Real Chips, Real Value</h3><p>₹1 = 1 chip. Buy, play, win more and sell your chips back anytime.<small class="hi">चिप्स बेचो, पैसे पाओ</small></p></div>
+      <div class="feature reveal"><div class="f-ic"><i data-i="shield"></i></div><h3>100% Secure</h3><p>Your money and data are protected. Every top-up is verified by our team.<small class="hi">पूरी तरह सुरक्षित भुगतान</small></p></div>
+      <div class="feature reveal"><div class="f-ic"><i data-i="bolt"></i></div><h3>Instant Chips</h3><p>Chips land in your account within minutes of payment. No waiting.<small class="hi">तुरंत चिप्स मिलेंगे</small></p></div>
+      <div class="feature reveal"><div class="f-ic"><i data-i="mobile"></i></div><h3>Play Anywhere</h3><p>Made for phones first — install it like an app and play on the go.<small class="hi">कहीं भी, कभी भी खेलो</small></p></div>
+      <div class="feature reveal"><div class="f-ic"><i data-i="bank"></i></div><h3>Easy Withdrawal</h3><p>Sell chips and get the money straight to your UPI / bank account.<small class="hi">बैंक में सीधे पैसे पाओ</small></p></div>
     </div>
   </div>
 </section>
 
-<!-- How it works -->
-<section class="how-section">
-  <div class="section-title">
-    <h2>How It Works / कैसे काम करता है</h2>
-    <p>4 easy steps to start / 4 आसान कदम</p>
-  </div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><h3>Register</h3><p>Free account in 30 seconds</p></div>
-    <div class="step"><div class="step-num">2</div><h3>Buy Chips</h3><p>₹1 = 1 Chip, pay via UPI/card</p></div>
-    <div class="step"><div class="step-num">3</div><h3>Play</h3><p>Teen Patti with real players</p></div>
-    <div class="step"><div class="step-num">4</div><h3>Sell &amp; Earn</h3><p>Sell chips → get real money</p></div>
+<!-- HAND RANKINGS -->
+<section class="section" id="rankings" style="padding-top:0">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">Teen Patti Hand Rankings</span>
+      <h2>Know your <span class="gold-text">winning hands</span></h2>
+      <p>From strongest to weakest — the classic 3 Patti order.</p>
+    </div>
+    <div class="ranks" id="ranks"></div>
   </div>
 </section>
 
-<!-- Chip packages -->
-<section class="pkg-section" style="padding-top:60px;">
-  <div class="section-title">
-    <h2>Chip Packages / चिप पैकेज</h2>
-    <p>₹1 = 1 Chip &nbsp;|&nbsp; 1 रुपया = 1 चिप</p>
+<!-- HOW IT WORKS -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Table to bank in <span class="gold-text">4 steps</span></h2>
+      <p class="hi">4 आसान कदम</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>Register</h3><p>Create a free account in 30 seconds and get 100 chips.</p></div>
+      <div class="step reveal"><h3>Add Chips</h3><p>₹1 = 1 chip. Pay with any UPI app.</p></div>
+      <div class="step reveal"><h3>Play</h3><p>Pick a table, see your cards — call, raise or show.</p></div>
+      <div class="step reveal"><h3>Withdraw</h3><p>Sell your chips and get paid to your UPI.</p></div>
+    </div>
   </div>
-  <div class="pkg-row">
-    <div class="pkg-box"><div class="pkg-chips">1,000</div><div class="pkg-label">Chips</div><div class="pkg-price">₹1,000</div><div class="pkg-rate">Starter Pack</div></div>
-    <div class="pkg-box pop"><div class="pkg-chips">2,000</div><div class="pkg-label">Chips</div><div class="pkg-price">₹2,000</div><div class="pkg-rate">Best Value <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em;"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 18l-6.3 3.2L7 14.2l-5-4.8 7-.9z"/></svg></div></div>
-    <div class="pkg-box"><div class="pkg-chips">5,000</div><div class="pkg-label">Chips</div><div class="pkg-price">₹5,000</div><div class="pkg-rate">Pro Pack</div></div>
-    <div class="pkg-box"><div class="pkg-chips">10,000</div><div class="pkg-label">Chips + Bonus 500</div><div class="pkg-price">₹10,000</div><div class="pkg-rate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:.35em;"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9"/><path d="M12 8C12 8 11 3 8 3a2.5 2.5 0 0 0 0 5zM12 8c0 0 1-5 4-5a2.5 2.5 0 0 1 0 5z"/></svg>+500 Free</div></div>
+</section>
+
+<!-- PACKAGES -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">Chip Packs</span>
+      <h2>Pick your <span class="gold-text">stack</span></h2>
+      <p>₹1 = 1 Chip &nbsp;·&nbsp; <span class="hi">1 रुपया = 1 चिप</span></p>
+    </div>
+    <div class="pkgs">
+      <a href="register.html" class="pkg reveal"><div class="cchip blue"></div><div class="amt">1,000</div><div class="lbl">Chips · Starter</div><span class="price">₹1,000</span></a>
+      <a href="register.html" class="pkg pop reveal"><span class="ribbon">MOST POPULAR</span><div class="cchip"></div><div class="amt">2,000</div><div class="lbl">Chips · Best value</div><span class="price">₹2,000</span></a>
+      <a href="register.html" class="pkg reveal"><div class="cchip green"></div><div class="amt">5,000</div><div class="lbl">Chips · Pro</div><span class="price">₹5,000</span></a>
+      <a href="register.html" class="pkg reveal"><div class="cchip gold"></div><div class="amt">10,000</div><div class="lbl">Chips · High Roller</div><span class="price">₹10,000</span></a>
+    </div>
   </div>
-  <div style="text-align:center;margin-top:28px;"><a href="register.html" class="btn btn-gold">Get Started Free</a></div>
 </section>
 
 <!-- CTA -->
-<div class="cta-banner">
-  <h2>Ready to Play? / तैयार हैं?</h2>
-  <p>Join thousands of players winning on JeetPatti every day!</p>
-  <a href="register.html" class="btn btn-gold btn-lg">Create Free Account / फ्री अकाउंट बनाएं</a>
-</div>
+<section class="container" style="padding-bottom:clamp(56px,8vw,96px)">
+  <div class="cta reveal">
+    <div class="cchip gold" style="--s:90px;left:-24px;top:-24px"></div>
+    <div class="cchip" style="--s:70px;right:-16px;bottom:-16px"></div>
+    <span class="eyebrow">Your seat is waiting</span>
+    <h2 style="margin-top:16px">Ready to play? <span class="hi gold-text">तैयार हैं?</span></h2>
+    <p>Join free and get 100 chips to start your first game.</p>
+    <a href="register.html" class="btn btn-gold btn-lg"><i data-i="gift"></i>Create Free Account</a>
+  </div>
+</section>
 
 <footer>
-  <span class="brand">♣ JeetPatti</span>
-  <p style="margin-bottom:6px;">India's Most Trusted Teen Patti Platform</p>
-  <p style="margin-bottom:16px;font-size:12px;">जीतो हर बार — Win Every Time &nbsp;|&nbsp; ₹1 = 1 Chip</p>
-  <div style="display:flex;gap:20px;justify-content:center;margin-bottom:12px;flex-wrap:wrap;">
-    <a href="#" style="color:var(--gray);text-decoration:none;font-size:12px;">Privacy Policy</a>
-    <a href="#" style="color:var(--gray);text-decoration:none;font-size:12px;">Terms</a>
-    <a href="#" style="color:var(--gray);text-decoration:none;font-size:12px;">Contact</a>
-    <a href="#" style="color:var(--gray);text-decoration:none;font-size:12px;">Help</a>
+  <div class="footer-grid">
+    <div>
+      <a href="index.html" class="brand"><span class="brand-mark">♠</span><span class="wm">Jeet<b>Patti</b></span></a>
+      <p style="margin-top:12px;max-width:320px;line-height:1.6">India's trusted Teen Patti platform. <span class="hi">जीतो हर बार</span> — Win every time.</p>
+    </div>
+    <div class="footer-links">
+      <a href="game.html">Play</a>
+      <a href="buy-chips.html">Buy Chips</a>
+      <a href="#rankings">Hand Rankings</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
   </div>
-  <p style="font-size:11px;">© 2025 JeetPatti. All rights reserved. 18+ only.</p>
+  <div class="footer-bottom">
+    <span>© 2025 JeetPatti. All rights reserved.</span>
+    <span style="display:inline-flex;align-items:center;gap:10px"><span class="age-badge">18+</span>Play responsibly. This game involves financial risk.</span>
+  </div>
 </footer>
 
+<script src="js/ui.js"></script>
 <script>
-function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
-document.addEventListener('click',function(e){const m=document.getElementById('mobile-menu');const h=document.querySelector('.hamburger');if(h&&!m.contains(e.target)&&!h.contains(e.target))m.classList.remove('open');});
+const RANKS = [
+  ['Trail', 'Three of a kind', ['A♠','A♥','A♦']],
+  ['Pure Sequence', 'Straight flush', ['Q♥','K♥','A♥']],
+  ['Sequence', 'Straight, mixed suits', ['4♣','5♦','6♠']],
+  ['Color', 'Flush — same suit', ['2♦','8♦','J♦']],
+  ['Pair', 'Two of a kind', ['K♠','K♣','7♥']],
+  ['High Card', 'None of the above', ['A♣','9♥','4♠']],
+];
+document.getElementById('ranks').innerHTML = RANKS.map((r, i) =>
+  `<div class="rank reveal in"><span class="num">${i + 1}</span><div class="hand">${r[2].map(c => JP.card(c)).join('')}</div><div><h3>${r[0]}</h3><p>${r[1]}</p></div></div>`
+).join('');
 </script>
 </body>
 </html>

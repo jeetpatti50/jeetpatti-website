@@ -2,61 +2,115 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="robots" content="noindex, nofollow"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
   <link rel="apple-touch-icon" href="icon-192.png"/>
-  <meta name="theme-color" content="#0a0006"/>
+  <link rel="manifest" href="manifest.json"/>
+  <meta name="theme-color" content="#0a0710"/>
   <title>Game History – JeetPatti</title>
   <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .sum { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 18px; }
+    .filters { display: inline-flex; gap: 4px; padding: 4px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+    .filters button { padding: 8px 16px; border-radius: 10px; border: none; background: none; color: var(--muted); font-family: var(--font); font-size: 13.5px; font-weight: 600; cursor: pointer; }
+    .filters button.on { background: var(--surface-3); color: var(--text); }
+    .h-list { display: flex; flex-direction: column; gap: 10px; }
+    .h-row { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 16px; padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid var(--line); border-left-width: 3px; }
+    .h-row.win { border-left-color: var(--emerald); }
+    .h-row.loss { border-left-color: var(--ruby); }
+    .h-n { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-size: 12.5px; font-weight: 700; color: var(--dim); background: var(--surface); }
+    .h-info b { font-size: 15px; display: flex; align-items: center; gap: 8px; }
+    .h-info span { display: block; color: var(--dim); font-size: 12.5px; margin-top: 3px; }
+    .h-amt { text-align: right; }
+    .h-amt b { font-size: 17px; font-weight: 800; display: block; }
+    .h-amt span { font-size: 12px; color: var(--dim); }
+    .h-row .mini-cards .pcard { --w: 36px; }
+    .h-row .mini-cards .pcard .pc-s { font-size: 15px; padding-top: 12px; }
+    @media (max-width: 760px) {
+      .sum { grid-template-columns: 1fr 1fr; }
+      .h-row { grid-template-columns: 1fr auto; gap: 10px 12px; }
+      .h-n { display: none; }
+      .h-row .mini-cards { grid-column: 1; }
+      .h-amt { grid-row: 1; grid-column: 2; }
+    }
+  </style>
 </head>
-<body>
-<nav class="navbar">
-  <a href="index.html" class="brand">♣ Jeet<span>Patti</span></a>
-  <div class="nav-links">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="game.html">Play</a>
-  </div>
-  <span class="nav-chips"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3h4"/></svg> <span id="nav-chips">0</span> Chips</span>
-</nav>
-<div style="max-width:900px;margin:0 auto;padding:40px 20px;">
-  <h1 style="color:var(--gold);font-size:26px;margin-bottom:6px;">Game History / गेम इतिहास</h1>
-  <p style="color:var(--gray);margin-bottom:28px;">Your last 30 games</p>
-  <div id="history-wrap" style="background:var(--green-mid);border:1px solid rgba(240,192,64,0.15);border-radius:20px;padding:24px;">
-    <div class="spinner"></div>
-  </div>
+<body data-page="history">
+<header id="topbar"></header>
+<div class="app">
+  <aside id="sidebar"></aside>
+  <main class="main">
+    <div class="page-head">
+      <div>
+        <h1>Game <span class="gold-text">History</span></h1>
+        <p>Your last 30 games · <span class="hi">गेम इतिहास</span></p>
+      </div>
+      <div class="filters" id="filters">
+        <button class="on" data-f="all">All</button>
+        <button data-f="win">Wins</button>
+        <button data-f="loss">Losses</button>
+      </div>
+    </div>
+    <div class="sum">
+      <div class="stat-card"><div class="stat-label"><i data-i="spade"></i>Games</div><div class="stat-value" id="s-games">0</div></div>
+      <div class="stat-card"><div class="stat-label"><i data-i="trophy"></i>Wins</div><div class="stat-value" id="s-wins" style="color:var(--emerald-2)">0</div></div>
+      <div class="stat-card"><div class="stat-label"><i data-i="x"></i>Losses</div><div class="stat-value" id="s-loss" style="color:var(--ruby-2)">0</div></div>
+      <div class="stat-card"><div class="stat-label"><i data-i="chart"></i>Net</div><div class="stat-value" id="s-net">0</div></div>
+    </div>
+    <div id="history-wrap"><div class="spinner"></div></div>
+  </main>
 </div>
+<nav id="tabbar"></nav>
+<script src="js/ui.js"></script>
 <script>
 const token = localStorage.getItem('token');
 if (!token) window.location.href = 'login.html';
+let HIST = [];
+const fmt = n => Math.abs(n).toLocaleString('en-IN');
+
+function render(filter) {
+  const wrap = document.getElementById('history-wrap');
+  const list = HIST.map((h, i) => ({ h, i })).filter(x => filter === 'all' || x.h.result === filter);
+  if (!list.length) {
+    wrap.innerHTML = '<div class="panel empty"><div class="empty-ic">' + JP.icon('spade') + '</div><p>' + (HIST.length ? 'Nothing here yet.' : 'No games yet.') + '</p><a href="game.html" class="btn btn-ruby btn-sm" style="margin-top:14px">Play a game</a></div>';
+    return;
+  }
+  wrap.innerHTML = '<div class="h-list">' + list.map(({ h, i }) => {
+    const win = h.result === 'win';
+    const amt = win ? h.chipsWon : h.chipsLost;
+    const cards = (h.playerCards || []).length ? '<div class="mini-cards">' + h.playerCards.map(c => JP.card(c)).join('') + '</div>' : '<span class="muted">—</span>';
+    return `<div class="h-row ${win ? 'win' : 'loss'}">
+      <div class="h-n">#${i + 1}</div>
+      <div class="h-info"><b><span class="badge ${win ? 'badge-green' : 'badge-red'}">${win ? 'WIN' : 'LOSS'}</span></b><span>${new Date(h.createdAt).toLocaleString('en-IN')}</span></div>
+      ${cards}
+      <div class="h-amt"><b style="color:${win ? 'var(--emerald-2)' : 'var(--ruby-2)'}">${amt > 0 ? (win ? '+' : '−') + '₹' + fmt(amt) : '—'}</b><span>Pot ₹${fmt(h.pot || 0)}</span></div>
+    </div>`;
+  }).join('') + '</div>';
+}
+
+document.querySelectorAll('#filters button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#filters button').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); render(b.dataset.f);
+}));
+
 async function load() {
   try {
-    const r1 = await fetch('/api/auth/me', { headers: { 'Authorization': token } });
-    const user = await r1.json();
-    document.getElementById('nav-chips').textContent = user.chips.toLocaleString();
+    JP.me().catch(() => {});
     const res = await fetch('/api/game/history', { headers: { 'Authorization': token } });
-    const history = await res.json();
-    if (!history.length) {
-      document.getElementById('history-wrap').innerHTML = '<p style="color:var(--gray);text-align:center;padding:30px;">No games yet. <a href="game.html" style="color:var(--gold)">Play your first game!</a></p>';
-      return;
-    }
-    document.getElementById('history-wrap').innerHTML = `
-      <table class="data-table">
-        <thead><tr><th>#</th><th>Date & Time</th><th>Result</th><th>Your Cards</th><th>Chips Won</th><th>Chips Lost</th><th>Pot</th></tr></thead>
-        <tbody>${history.map((h, i) => `
-          <tr>
-            <td style="color:var(--gray)">${i + 1}</td>
-            <td style="color:var(--gray);font-size:12px">${new Date(h.createdAt).toLocaleString('en-IN')}</td>
-            <td><span class="badge ${h.result === 'win' ? 'badge-green' : 'badge-red'}">${h.result === 'win' ? '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg> WIN' : '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg> LOSS'}</span></td>
-            <td style="font-size:12px;color:var(--gray)">${(h.playerCards || []).join(', ') || '-'}</td>
-            <td style="color:var(--green-glow);font-weight:600">${h.chipsWon > 0 ? '+' + h.chipsWon : '-'}</td>
-            <td style="color:#ef9a9a">${h.chipsLost > 0 ? '-' + h.chipsLost : '-'}</td>
-            <td style="color:var(--gold)">${h.pot || 0}</td>
-          </tr>`).join('')}
-        </tbody>
-      </table>`;
-  } catch(e) {
-    document.getElementById('history-wrap').innerHTML = '<p style="color:var(--gray);text-align:center;padding:20px;">Could not load. Is server running?</p>';
+    HIST = await res.json();
+    let wins = 0, won = 0, lost = 0;
+    HIST.forEach(h => { if (h.result === 'win') { wins++; won += h.chipsWon || 0; } else lost += h.chipsLost || 0; });
+    const net = won - lost;
+    document.getElementById('s-games').textContent = HIST.length;
+    document.getElementById('s-wins').textContent = wins;
+    document.getElementById('s-loss').textContent = HIST.length - wins;
+    const ne = document.getElementById('s-net');
+    ne.textContent = (net > 0 ? '+' : net < 0 ? '−' : '') + fmt(net);
+    ne.style.color = net > 0 ? 'var(--emerald-2)' : net < 0 ? 'var(--ruby-2)' : '';
+    render('all');
+  } catch (e) {
+    document.getElementById('history-wrap').innerHTML = '<div class="panel empty">Could not load. Is the server running?</div>';
   }
 }
 load();
